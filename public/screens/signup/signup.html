@@ -1,0 +1,29 @@
+<section>
+	<div class="main">
+	<h1>Create an account</h1>
+	<form data-ng-app="" name="myForm" novalidate>
+		<label class="reglabel" for="Name">Name</label><br>
+		<input type="text" id="Name" placeholder="eg.,Edward" name="user" data-ng-model="user" required/>
+		<span style="color:red" data-ng-show="myForm.user.$dirty && myForm.user.$invalid">
+			<span data-ng-show="myForm.user.$error.required">Username is required.</span>
+		</span><br>
+		<label class="reglabel" for="Email">Email</span></label><br>
+		<input type="email" class="Email" placeholder="eg.,abcxyz@gmail.com" name="email" data-ng-model="email" required/>
+		<span style="color:red" data-ng-show="myForm.email.$dirty && myForm.email.$invalid">
+			<span data-ng-show="myForm.email.$error.required">Email is required.</span>
+			<span data-ng-show="myForm.email.$error.email">Invalid email address.</span>
+		</span><br>
+		<label class="reglabel" for="password">Password</label><br>
+		<input type="password" class="password" placeholder="eg.,********" name="pass1" data-ng-model="pass1" required/>
+		<span style="color:red" data-ng-show="myForm.pass1.$dirty && myForm.pass1.$invalid">
+			<span data-ng-show="myForm.pass1.$error.required">Password is required.</span>
+		</span><br>
+		<label class="reglabel" for="confirmpassword">Confirm Password</label><br>
+		<input type="password" id="confirmpassword" placeholder="eg.,********" name="pass2" data-ng-model="pass2" required/>
+		<span style="color:red" data-ng-show="myForm.pass2.$dirty && myForm.pass2.$invalid">
+			<span data-ng-show="myForm.pass2.$error.required">Re-enter the password.</span>
+		</span><br>
+		<button class="regbtn"  data-ng-click="add()">Create New Account</button>
+		<p class="regpara">Already have an account? <a class="regank" ui-sref="login">Log in</a></p></form>
+	</div>
+</section>

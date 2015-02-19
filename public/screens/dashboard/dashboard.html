@@ -1,0 +1,45 @@
+<div id="main1">
+	<header>
+		<button class="btn" data-ng-click="projectclick()" data-ng-bind="myvar3" data-ng-init="myvar3 = 'Projects' "></button>
+		<div id="task">Task Manager</div>
+		<button class="btn" data-ng-click="addproclick()">Add</button>
+		<button id="namebtn" data-ng-bind="obj.name" data-ng-click="nameclick()"></button>
+		    
+	</header>
+	<div id="content">
+		<div id="sh" data-ng-show="myvar">
+			<li class="pro" data-ng-repeat="p in projects" data-ng-click="projecttoclick(p)">
+				{{p.name}}
+			</li>
+		</div>
+		<div id="sh1" data-ng-show="myvar1">                      
+			<form name="myForm1">
+				<label for="title">Title</label><br>
+				<input type="text" id="title" name="title" data-ng-model="title" required/>
+				<span style="color:red" data-ng-show="myForm1.title.$dirty && myForm1.title.$invalid">
+					<span data-ng-show="myForm1.title.$error.required">Title is required.</span>
+				</span></form>
+				<button data-ng-click="addproject()">Create</button>
+		</div>
+		<div id="sh2" data-ng-show="myvar2">
+			<div class="pro">My profile</div>
+			<div class="pro"><a id="out" ui-sref="login">Logout</a></div>
+		</div>
+		<div ui-view></div>
+	</div>	
+	<div id="sh3" data-ng-show="var6">
+		<button class="listbtn" data-ng-click="rename(projecttoclick)">Rename</button><br>
+		<button class="listbtn" data-ng-click="readtask(projecttoclick)">Tasklist</button><br>
+		<button class="listbtn" data-ng-click="notmembers()">Add Member</button>
+	</div>
+	<div id="sh" data-ng-show="var7">
+		New Title<br><input id="title" type="text" name="newpro" data-ng-model="newpro"><br>
+		<button class="btn" data-ng-click="savechange(projecttoclick)">Save</button>
+	</div>
+	<div id="team1" data-ng-show="icon1">
+		<!--<p data-ng-bind="selectedmember" data-ng-init="selectedmember = ' ' "></p>-->
+		<tags-input data-ng-model="tags"></tags-input>
+		<li id="one" data-ng-repeat="m in members" data-ng-click="select(m)">{{m.email}}</li>
+		<button class="btn" data-ng-click="invite()">Invite</button>
+	</div>
+</div>

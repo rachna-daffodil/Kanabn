@@ -1,0 +1,21 @@
+<section>
+	<div class="main">
+		<h1>Log in here</h1>
+		<form name="myForm" novalidate ng-submit="submit()"> 
+			<label class="reglabel" for="Email">Email</label><br>
+			<input type="email" class="Email" placeholder="eg.,abcxyz@gmail.com" name="loginemail" data-ng-model="loginemail" required/>
+			<span style="color:red" data-ng-show="myForm.loginemail.$dirty && myForm.loginemail.$invalid">
+				<span data-ng-show="myForm.loginemail.$error.required">Email is required.</span>
+				<span data-ng-show="myForm.loginemail.$error.email">Invalid email address.</span>
+			</span><br>
+			<label class="reglabel" for="password">Password</label><br>
+			<input type="password" class="password" placeholder="eg.,********" name="pass" data-ng-model="pass" required/>
+			<span style="color:red" data-ng-show="myForm.pass.$dirty && myForm.pass.$invalid">
+				<span data-ng-show="myForm.pass.$error.required">Password is required.</span>
+			</span><br>
+			<button type="submit" class="regbtn" data-ng-click="submit()">Sign In</button>
+			<p class="regpara">Forgot your password? <a class="regank" ui-sref="kanban.resetpassword">Reset your password</a></p>
+			<p class="regpara">Don't have an account? <a class="regank" ui-sref="kanban.signup">Create an account</a></p></form>
+		</form>
+	</div>
+</section>

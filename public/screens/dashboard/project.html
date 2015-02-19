@@ -1,0 +1,42 @@
+<div data-ng-init="title">
+    <button id="teambtn" data-ng-click="showteam()"><img src="../images/images (1).jpg"/></button>
+	<p data-ng-bind="myvar3" style="margin-left:40px"></p>
+	<div id="rect">
+		<h3>Backlogs</h3>
+		<div id="one" ng-drag="true" ng-drop="true" data-ng-repeat="task in taskss | orderBy:'sequence'" ng-if="task.status=='new'" ng-drag-data="task" ng-init="taskss = []" ng-drag-success="handleDragStart($data,$event)" ng-drop-success="handleDragOver($data,$event, task)">
+			<p data-ng-click="showdetail(task)">{{task.title}}</p>
+		</div>
+		<span data-ng-show="var2">
+			<input id="title" type="text" name="name1" data-ng-model="name1"><br>
+			<input id="title" type="text" name="des" data-ng-model="des"><br>
+			<input id="title" type="date" name="day" data-ng-model="day"><br>
+			<button class="btn" data-ng-click="addtask()" >Add</button>
+			<button class="btn" data-ng-click="canceltask()">Cancel</button>
+		</span>
+		<button class="b" data-ng-show="var1" data-ng-click="showtask()">Add a task...</button>
+	</div>
+	<div id="rect1" ng-drop="true" ng-drop-success="handleprogressDragOver($data,$event,task)">
+		<h3>In progress</h3>
+		<div ng-drag="true" ng-drop="true" data-ng-repeat="task in taskss | orderBy:'sequence'" ng-if="task.status=='inprogress'"ng-drag-data="task" ng-init="taskss = []" ng-drag-success="handleDragStart($data,$event)" ng-drop-success="handleDragOver($data,$event, task)">
+			<p data-ng-click="showdetail(task)">{{task.title}}</p>
+		</div>
+	</div>
+	<div id="rect2" ng-drop="true" ng-drop-success="handlecompleteDragOver($data,$event,task)">
+		<h3>Completed</h3>
+		<div ng-drop="true" data-ng-repeat="task in taskss | orderBy:'sequence'" ng-if="task.status=='complete'" ng-drag-data="task" ng-init="taskss = []" ng-drag-success="handleDragStart($data,$event)" ng-drop-success="handleDragOver($data,$event, task)">
+			<p data-ng-click="showdetail(task)">{{task.title}}</p>
+		</div>
+	</div>
+	
+	<div id="taskdetail" data-ng-show="var4">
+	   Name <br><input id="title" data-ng-model="n" ng-readonly="var5"/>
+	   Description <br><input id="title" type="text" data-ng-model="d" ng-readonly="var5"/>
+	   Status <br><input id="title" type="text" data-ng-model="s" readonly/>
+	   Due-Date <br><input id="title" type="date" data-ng-model="dd" ng-readonly="var5"/>
+	   <button class="btn" data-ng-click="edit()">Edit</button>
+	   <button class="btn" data-ng-click="save()">Save</button>
+	</div>
+	<div id="team" data-ng-show="icon">
+		<li id="one" data-ng-repeat="m in projecttoclick.email">{{m}}</li>
+	</div>
+</div>
