@@ -1,14 +1,20 @@
+var express=require('express');
+var db=require('../db/db.js');
+
 var nodemailer = require("nodemailer");
 var ejs = require("ejs");
 var transporter = nodemailer.createTransport();
 
-var fromEmail = "nitesh.singh@daffodilsw.com";
+var fromEmail = "rachna.kadian@daffodilsw.com";
 var sender = "KanBan Notification";
 module.exports.email ={
 
 	sendemail: function(options, callback)
       {
-        if(!options || options.to || options.subject || options.text){
+        options.from = fromEmail;
+        options.subject = sender;
+        console.log("in sendemail "+JSON.stringify(options)+'/'+fromEmail);
+        if(!options || !options.to || !options.html || !options.from || !options.subject){
           throw new Error("Mandatory things are missing.");
         }
         if(options.html){
@@ -27,6 +33,7 @@ module.exports.email ={
                            console.log(error);
                        }else{
                            console.log("Message sent: " + response.message);
+                           callback(null,response);
                        }
                     });
 				    

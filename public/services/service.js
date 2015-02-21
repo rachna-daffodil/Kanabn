@@ -1,24 +1,43 @@
-kanbanApp.service('DataService', function ($http) {
-
+kanbanApp.service('DataService',['$http', function ($http) {
+    var result;
    this.getWebService = function ($scope, webServiceUrl, params) {
       var completeWebServiceUrl = $scope.BASE_URL + webServiceUrl;
-      return $http.get(completeWebServiceUrl, params);
+      return $http.get(webServiceUrl, params);
    };
 
-   this.postWebService = function ($scope, webServiceUrl, params, token) {
+   this.postWebService = function ($scope, webServiceUrl, params, callback) {
+        console.log("in service"+webServiceUrl+'/'+JSON.stringify(params));
        var completeWebServiceUrl = $scope.BASE_URL + webServiceUrl;
-       if (token) {
-           return $http.post(completeWebServiceUrl, (params && params.data ? params.data : null), { headers: {"X-CSRF-Token": token, "Content-Type": "application/json"} });
-       } else {
-           return $http.post(completeWebServiceUrl, (params && params.data ? params.data : null));
-       }
-   };
-   this.putWebService = function ($scope, webServiceUrl, params) {
+            $http.post(webServiceUrl, params).
+            success(function(data){
+              console.log("data is "+data);
+              result = data;
+              console.log("result in service ",result);
+              callback(null,data);
+            }).error(function(data){
+               alert("error is ");
+               result = data;
+            });
+        return result;
+    };
+   this.putWebService = function ($scope, webServiceUrl, params, callback ){
+      console.log("in service"+webServiceUrl+'/'+$scope);
+      
       var completeWebServiceUrl = $scope.BASE_URL + webServiceUrl;
-      return $http.put(completeWebServiceUrl,params);
+       $http.put(webServiceUrl,params).
+        success(function(data){
+          console.log("data is "+data);
+          result = data;
+          console.log("result in service ",result);
+          callback(null,data);
+        }).error(function(data){
+          alert("error is "+data);
+          result = data;
+        });
+        return result;
    };
    this.deleteWebService = function ($scope, webServiceUrl, params) {
       var completeWebServiceUrl = $scope.BASE_URL + webServiceUrl;
-      return $http.delete(completeWebServiceUrl,params);
+      return $http.delete(webServiceUrl,params);
    };
-});
+}]);

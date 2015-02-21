@@ -1,7 +1,8 @@
-kanbanApp.controller('SigninController', function($scope,  $state, $cookieStore, DataService) {
+kanbanApp.controller('SigninController', function($scope,  $state, DataService) {
     $scope.submit = function(){
-    	var params = {params : {email : $scope.loginemail, password : $scope.pass}};
-    	DataService.getWebService($scope, '/user/signin', params, function(err, data){
+        console.log("in signin controller");
+    	var params = {email : $scope.loginemail, password : $scope.pass};
+    	DataService.postWebService($scope, '/user/signin', params, function(err, data){
     		if(err){
     			alert(err.message);
     		} else {
@@ -11,10 +12,11 @@ kanbanApp.controller('SigninController', function($scope,  $state, $cookieStore,
 		 				alert("You are not verified");
 		 			} else {
 		 				window.localStorage.setItem("email", data.email);
-		 	 			$state.go('kanban.dashboard');
+		 	 			$state.go('dashboard');
+                        console.log("successfully logged in"+data);
 		     		}
     			}
     		}
     	});
 	}
-})
+});

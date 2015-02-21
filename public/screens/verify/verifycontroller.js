@@ -1,10 +1,13 @@
 kanbanApp.controller('VerifyController', function($scope, $state, $stateParams, DataService){
-	var params = {params : {verification : true}};
-	DataService.putWebService($scope, '/user/verify/' + $stateParams.email, params, function(err,data){
+	$scope.result = "false";
+	var params = {verify : true};
+	DataService.putWebService($scope, '/user/verify/' + $stateParams.token, params, function(err,data){
 		if(err){
-			console.log(err);
+			console.log("error",err);
 		} else {
-			console.log(data);
+			$scope.result = data;
+			console.log("result in controller "+$scope.result);
 		}
 	});
+	
 });

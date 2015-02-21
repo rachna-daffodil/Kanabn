@@ -40,9 +40,5 @@ var taskInfo= new Schema({
 
  
 module.exports.user= mongoose.model('singup',register);
-
-
 module.exports.projects  = mongoose.model('projectInfo',projectInfo); 
-
-
 module.exports.tasks= mongoose.model('detail',taskInfo);

@@ -10,13 +10,13 @@
 7 info start KanBan@0.0.0
 8 verbose unsafe-perm in lifecycle true
 9 info KanBan@0.0.0 Failed to exec start script
-10 error KanBan@0.0.0 start: `node ./app.js`
+10 error KanBan@0.0.0 start: `node app.js`
 10 error Exit status 8
 11 error Failed at the KanBan@0.0.0 start script.
 11 error This is most likely a problem with the KanBan package,
 11 error not with npm itself.
 11 error Tell the author that this fails on your system:
-11 error     node ./app.js
+11 error     node app.js
 11 error You can get their info via:
 11 error     npm owner ls KanBan
 11 error There is likely additional logging output above.

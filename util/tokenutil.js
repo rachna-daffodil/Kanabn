@@ -1,6 +1,10 @@
+var express=require('express');
+var db=require('../db/db.js');
+
+
 module.exports.password= {
 
-	   changepassword:function(data,callback)
+	   changepassword:function(callback)
 	    {
         var text = "";
 
@@ -15,7 +19,7 @@ module.exports.password= {
 
 	   },
 
-       generatetokan:function(data,callback)
+       generatetokan:function(callback)
        {
        	var text=""
           var charset = "abcdefghijklmnopqrstuvwxyz0123456789";

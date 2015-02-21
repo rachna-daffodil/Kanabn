@@ -26,7 +26,7 @@ kanbanApp.controller('DashboardController', function($scope, $state, DataService
 	    $scope.myvar=!$scope.myvar;
 
 	    $scope.data4=$scope.obj.email;
-	    DataService.getWebService($scope, '/project/' + $scope.data4, function(err,data){
+	    DataService.getWebService($scope, '/project/fetch/' + $scope.data4, function(err,data){
 	    	if(err){
 	    		console.log(err);
 	    	} else {
@@ -49,7 +49,7 @@ kanbanApp.controller('DashboardController', function($scope, $state, DataService
 	  }
 	  $scope.notmembers=function(){
 	    $scope.icon1=!$scope.icon1;
-	    DataService.getWebService($scope, '/register', function(err,data){
+	    DataService.getWebService($scope, '/user/signup', function(err,data){
 	    	if(err){
 	    		console.log(err);
 	    		} else {
@@ -66,7 +66,7 @@ kanbanApp.controller('DashboardController', function($scope, $state, DataService
 	  }
 	$scope.addproject=function(){
 		var params = {params : {name : $scope.title, email : [$scope.obj.email]}};
-		DataService.postWebService($scope, '/project', params, function(err,data){
+		DataService.postWebService($scope, '/project/create', params, function(err,data){
 				if(err){
 					console.log(err);
 				} else {
@@ -80,13 +80,14 @@ kanbanApp.controller('DashboardController', function($scope, $state, DataService
 	     	 		$state.go('kanban.dashboard');
 		 	 		$scope.myvar1=!$scope.myvar1;
 					}
+				}
 			});
 	  }
 	  
 	  
 	   $scope.readtask=function(projct){
 	      	$scope.upgrade=projct;
-		  	DataService.getWebService($scope, '/project/task/' +projct.name+'/'+projct.email, function(err,data){
+		  	DataService.getWebService($scope, '/task/fetch/' +projct.name+'/'+projct.email, function(err,data){
 	    	if(err){
 	    		console.log(err);
 	    	} else {
@@ -107,19 +108,20 @@ kanbanApp.controller('DashboardController', function($scope, $state, DataService
 	} 
    $scope.addtask=function(){
    		var params = {params : {title:$scope.name1,email:$scope.obj.email,proname:$scope.myvar3,des:$scope.des,due_date:$scope.day,sequence:$scope.order}};
-			DataService.postWebService($scope, '/project/task', params, function(err,data){
+			DataService.postWebService($scope, '/task/create', params, function(err,data){
 				if(err){
 					console.log(err);
 				} else {
 					if(data.length!=0){
-              		window.localStorage.setItem("title", data.title);
-              		window.localStorage.setItem("des", data.des);
-		 	 		$scope.order +=1;
-               		$scope.taskss.push(data);
-		 	 		$scope.des = " ";
-		 	 		$scope.name1=" ";
-		 	 		$scope.var1=!$scope.var1;
-              		$scope.var2=!$scope.var2;
+              			window.localStorage.setItem("title", data.title);
+              			window.localStorage.setItem("des", data.des);
+		 	 			$scope.order +=1;
+               			$scope.taskss.push(data);
+		 	 			$scope.des = " ";
+		 	 			$scope.name1=" ";
+		 	 			$scope.var1=!$scope.var1;
+              			$scope.var2=!$scope.var2;
+					}
 				}
 			});
   	  }
@@ -144,7 +146,7 @@ kanbanApp.controller('DashboardController', function($scope, $state, DataService
 	
 	$scope.save=function(){
 		var params = {params : {des : $scope.d , due_date : $scope.dd,title : $scope.n}};
-			DataService.putWebService($scope, '/project/task/' + $scope.n+'/'+$scope.e+'/'+$scope.p, params, function(err,data){
+			DataService.putWebService($scope, '/task/update/' + $scope.n+'/'+$scope.e+'/'+$scope.p, params, function(err,data){
 				if(err){
 					console.log(err);
 				} else {
@@ -165,11 +167,11 @@ kanbanApp.controller('DashboardController', function($scope, $state, DataService
 	}
 	$scope.savechange=function(pro1){
 		var params = {params : {"name" : $scope.newpro}};
-			DataService.putWebService($scope, '/project/' + pro1.name, params, function(err,data){
+			DataService.putWebService($scope, '/project/update/' + pro1.name, params, function(err,data){
 				if(err){
 					console.log(err);
 				} else {
-					DataService.getWebService($scope, '/project/task/' + $scope.newpro+'/'+$scope.obj.email, params, function(err,data){
+					DataService.getWebService($scope, '/task/fetch/' + $scope.newpro+'/'+$scope.obj.email, params, function(err,data){
 						if(err){
 							console.log(err);
 						} else {
@@ -221,7 +223,7 @@ kanbanApp.controller('DashboardController', function($scope, $state, DataService
 	
 	dropedTask.sequence = (firstSeq + secondSeq) / 2;
 	var params = {params : {sequence: dropedTask.sequence}};
-		DataService.putWebService($scope, '/project/task/' + dropedTask.title + '/' +dropedTask.email + '/' + dropedTask.proname, params, function(err, data){
+		DataService.putWebService($scope, '/task/update/' + dropedTask.title + '/' +dropedTask.email + '/' + dropedTask.proname, params, function(err, data){
 			if(err){
 				console.log(err);
 			} else {
@@ -232,14 +234,14 @@ kanbanApp.controller('DashboardController', function($scope, $state, DataService
 };
 $scope.handleprogressDragOver = function (dropedTask, event, belowTask) {
 	var params = {params : {status: "inprogress"}};
-	DataService.putWebService($scope, '/project/task/' +dropedTask.title + '/' + dropedTask.email + '/' + dropedTask.proname, params, function(err, data){
+	DataService.putWebService($scope, '/task/update/' +dropedTask.title + '/' + dropedTask.email + '/' + dropedTask.proname, params, function(err, data){
 		if(err){
 			console.log(err);
 		} else {
 			console.log(data);
 		}
 	});
-	DataService.getWebService($scope, '/project/task/' + dropedTask.proname + '/' + dropedTask.email, params, function(err,data){
+	DataService.getWebService($scope, '/task/fetch/' + dropedTask.proname + '/' + dropedTask.email, params, function(err,data){
 		if(err){
 			console.log(err);
 		} else {
@@ -250,14 +252,14 @@ $scope.handleprogressDragOver = function (dropedTask, event, belowTask) {
 };
 $scope.handlecompleteDragOver = function (dropedTask, event, belowTask) {
 	var params = {params : {status: "complete"}};
-	DataService.putWebService($scope, '/project/task/' + dropedTask.title + '/' +dropedTask.email + '/' + dropedTask.proname, params, function(err, data){
+	DataService.putWebService($scope, '/task/update/' + dropedTask.title + '/' +dropedTask.email + '/' + dropedTask.proname, params, function(err, data){
 		if(err){
 			console.log(err);
 		} else {
 			console.log(data);
 		}
 	});
-	DataService.getWebService($scope, '/project/task/' + dropedTask.proname + '/' + dropedTask.email, params, function(err,data){
+	DataService.getWebService($scope, '/task/fetch/' + dropedTask.proname + '/' + dropedTask.email, params, function(err,data){
 		if(err){
 			console.log(err);
 		} else {
@@ -266,4 +268,4 @@ $scope.handlecompleteDragOver = function (dropedTask, event, belowTask) {
 		}
 	});
 };
-}]);
+});

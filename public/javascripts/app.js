@@ -3,31 +3,36 @@ var kanbanApp = angular.module('KanBanApp', ['ui.router', 'ngCookies', 'ngDragga
 kanbanApp.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
         
-        .state('kanban.signin', {
+        .state('signin', {
             url: '/user/signin',
 			controller:'SigninController',
-			templateUrl: '/signin/signin.html'
+			templateUrl: '/screens/signin/signin.html'
         })
         
-        .state('kanban.signup', {
+        .state('signup', {
             url: '/user/signup',
 			controller: 'SignupController',
-            templateUrl: '/signup/signup.html'       
+            templateUrl: '/screens/signup/signup.html'       
         })
-		.state('kanban.resetpassword', {
+		.state('resetpassword', {
             url: '/user/resetpassword',
 			controller: 'ResetPasswordController',
-            templateUrl: '/resetpassword/reset.html'     
+            templateUrl: '/screens/resetpassword/reset.html'     
         })
-		.state('kanban.dashboard', {
+		.state('dashboard', {
             url: '/dashboard',
 			controller: 'DashboardController',
-            templateUrl: '/dashboard/dashboard.html'       
+            templateUrl: '/screens/dashboard/dashboard.html'       
         })
-		.state('kanban.verify', {
+        .state('dashboard.project', {
+            url: '/project',
+            controller: 'DashboardController',
+            templateUrl: '/screens/dashboard/project.html'       
+        })
+		.state('verify', {
             url: '/user/verify/:token',
 			controller: 'VerifyController',
-            templateUrl: '/verify/verify.html'       
+            templateUrl: '/screens/verify/verify.html'       
         })
 		
         $urlRouterProvider.otherwise('/user/signin');
