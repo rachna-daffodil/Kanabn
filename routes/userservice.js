@@ -56,9 +56,9 @@ router.put('/resetpassword/:change', function(req, res, next) {
   });
 });
 
-router.get('/signup',function(req,res,next){
-	res.setHeader("Content-Type","application/json");
-	api.getusers({},function(err,response){
+router.get('/signup/:team',function(req,res,next){
+	console.log(req.params.team);
+	api.getusers(req.params.team,function(err,response){
 	if(err) { 
 	   res.status(400).send(err);
      } else {

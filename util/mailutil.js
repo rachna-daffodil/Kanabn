@@ -7,20 +7,22 @@ var transporter = nodemailer.createTransport();
 
 var fromEmail = "rachna.kadian@daffodilsw.com";
 var sender = "KanBan Notification";
+
 module.exports.email ={
 
 	sendemail: function(options, callback)
       {
-        options.from = fromEmail;
-        options.subject = sender;
+        options.subject = options.subject;
         console.log("in sendemail "+JSON.stringify(options)+'/'+fromEmail);
         if(!options || !options.to || !options.html || !options.from || !options.subject){
           throw new Error("Mandatory things are missing.");
         }
-        if(options.html){
-          options.html = options.data ? ejs.render(options.html, options.data) : options.html;
-        } else {
-          options.text = options.data ? ejs.render(options.text, options.data) : options.text;
+        if(options.data){
+        	if(options.html){
+          		options.html = ejs.render(options.html, options.data);
+        	} else { 	
+          		options.html = ejs.render(options.text, options.data);
+        	}
         }
         if(!options.from){
           options.from = fromEmail;
@@ -29,14 +31,12 @@ module.exports.email ={
           options.sender = sender;
         }
       	transporter.sendMail(options, function(error, response){
-                       if(error){
-                           console.log(error);
-                       }else{
-                           console.log("Message sent: " + response.message);
-                           callback(null,response);
-                       }
-                    });
-				    
-
-      },
+			if(error){
+				console.log(error);
+			} else {
+				console.log("Message sent: " + response.message);
+				callback(null,response);
+			}
+		});
+	},
 }

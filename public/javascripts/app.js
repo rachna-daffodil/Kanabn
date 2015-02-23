@@ -1,4 +1,4 @@
-var kanbanApp = angular.module('KanBanApp', ['ui.router', 'ngCookies', 'ngDraggable', 'ngTagsInput']);
+var kanbanApp = angular.module('KanBanApp', ['ui.router', 'ngCookies', 'ngDraggable','ngDialog']);
 
 kanbanApp.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider

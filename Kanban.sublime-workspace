@@ -4,6 +4,126 @@
 		"selected_items":
 		[
 			[
+				"data",
+				"data-ng-click"
+			],
+			[
+				"margi",
+				"margin-left"
+			],
+			[
+				"mar",
+				"margin-left"
+			],
+			[
+				"marg",
+				"margin-bottom"
+			],
+			[
+				"li",
+				"line-height"
+			],
+			[
+				"m",
+				"margin-left"
+			],
+			[
+				"fon",
+				"font-family"
+			],
+			[
+				"paddi",
+				"padding-right"
+			],
+			[
+				"border",
+				"border-top-left-radius"
+			],
+			[
+				"in",
+				"inline-block"
+			],
+			[
+				"di",
+				"display"
+			],
+			[
+				"pa",
+				"padding-right"
+			],
+			[
+				"padd",
+				"padding-left"
+			],
+			[
+				"list",
+				"list-style-type"
+			],
+			[
+				"user",
+				"username"
+			],
+			[
+				"text",
+				"text-decoration"
+			],
+			[
+				"font",
+				"font-size"
+			],
+			[
+				"wid",
+				"width"
+			],
+			[
+				"BORDER",
+				"border-radius"
+			],
+			[
+				"margin",
+				"margin-top"
+			],
+			[
+				"co",
+				"color"
+			],
+			[
+				"border-r",
+				"border-radius"
+			],
+			[
+				"ma",
+				"margin"
+			],
+			[
+				"w",
+				"width"
+			],
+			[
+				"fo",
+				"font-size"
+			],
+			[
+				"max",
+				"max-height"
+			],
+			[
+				"bac",
+				"background-color"
+			],
+			[
+				"s",
+				"state"
+			],
+			[
+				"se",
+				"sender"
+			],
+			[
+				"from",
+				"fromEmail"
+			],
+			[
 				"web",
 				"webServiceUrl"
 			],
@@ -39,24 +159,55 @@
 			"file": "public/services/service.js",
 			"settings":
 			{
-				"buffer_size": 1190,
-				"line_ending": "Windows",
-				"name": "routerApp.service('DataService', function ($http)"
+				"buffer_size": 1963,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "public/stylesheets/style.css",
+			"settings":
+			{
+				"buffer_size": 3302,
+				"line_ending": "Unix"
 			}
 		},
 		{
 			"file": "public/index.html",
 			"settings":
 			{
-				"buffer_size": 1224,
+				"buffer_size": 1588,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "public/screens/appcontroller.js",
+			"file": "public/screens/dashboard/dashboard.html",
 			"settings":
 			{
-				"buffer_size": 120,
+				"buffer_size": 2363,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "public/screens/dashboard/dashboardcontroller.js",
+			"settings":
+			{
+				"buffer_size": 9636,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "public/screens/dashboard/project.html",
+			"settings":
+			{
+				"buffer_size": 4324,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "public/javascripts/app.js",
+			"settings":
+			{
+				"buffer_size": 1301,
 				"line_ending": "Windows"
 			}
 		},
@@ -64,72 +215,8 @@
 			"file": "db/db.js",
 			"settings":
 			{
-				"buffer_size": 1215,
+				"buffer_size": 1274,
 				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "routes/userservice.js",
-			"settings":
-			{
-				"buffer_size": 1971,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "public/screens/signup/signupcontroller.js",
-			"settings":
-			{
-				"buffer_size": 495,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "db/users.js",
-			"settings":
-			{
-				"buffer_size": 3094,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "public/screens/signin/signin.html",
-			"settings":
-			{
-				"buffer_size": 1275,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "public/screens/signin/signincontroller.js",
-			"settings":
-			{
-				"buffer_size": 619,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "app.js",
-			"settings":
-			{
-				"buffer_size": 1864,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "public/javascripts/app.js",
-			"settings":
-			{
-				"buffer_size": 1305,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "routes/index.js",
-			"settings":
-			{
-				"buffer_size": 205,
-				"line_ending": "Unix"
 			}
 		}
 	],
@@ -160,35 +247,41 @@
 	},
 	"file_history":
 	[
-		"/E/Projects/rachna/Kanban/node_modules/express/lib/view.js",
-		"/E/Projects/rachna/Kanban/views/index.jade",
-		"/E/Projects/rachna/Kanban/public/javascripts/app.js",
-		"/E/Projects/rachna/Kanban/public/screens/appcontroller.js",
 		"/E/Projects/rachna/Kanban/routes/taskservice.js",
-		"/E/Projects/rachna/Kanban/db/tasks.js",
-		"/E/Projects/rachna/Kanban/public/screens/dashboard/dashboardcontroller.js",
-		"/E/Projects/rachna/Kanban/routes/projectservice.js",
-		"/E/Projects/rachna/Kanban/package.json",
-		"/E/Projects/rachna/Kanban/public/index.html",
-		"/E/Projects/rachna/Kanban/db/users.js",
-		"/E/Projects/rachna/Kanban/routes/index.js",
-		"/C/Users/Manjeet/Downloads/api.js",
-		"/E/Projects/rachna/Kanban/db/projects.js",
-		"/E/Projects/rachna/Kanban/util/mailutil.js",
-		"/E/Projects/rachna/Kanban/util/tokenutil.js",
 		"/E/Projects/rachna/Kanban/routes/userservice.js",
+		"/E/Projects/rachna/Kanban/util/mailutil.js",
+		"/E/Projects/rachna/Kanban/db/users.js",
+		"/E/Projects/rachna/Kanban/db/tasks.js",
+		"/E/Projects/rachna/Kanban/routes/projectservice.js",
+		"/E/Projects/rachna/Kanban/db/projects.js",
+		"/E/Projects/rachna/Kanban/public/angularjs-dropdown-multiselect-.js",
+		"/E/Projects/rachna/Kanban/public/index.html",
+		"/E/Projects/rachna/Kanban/public/Gruntfile.js",
+		"/E/Projects/rachna/Kanban/public/screens/signin/signincontroller.js",
+		"/E/Projects/rachna/Kanban/public/screens/signin/signin.html",
+		"/E/Projects/rachna/Kanban/public/javascripts/app.js",
+		"/E/Projects/rachna/Kanban/public/stylesheets/signup.css",
+		"/E/Projects/rachna/Kanban/public/services/service.js",
 		"/E/Projects/rachna/Kanban/app.js",
-		"/E/Projects/rachna/Kanban/public/screens/dashboard/project.html",
-		"/E/Projects/rachna/Kanban/public/screens/signup/signupcontroller.js",
-		"/E/Projects/rachna/Kanban/public/screens/dashboard/dashboard.html",
+		"/E/Projects/rachna/Kanban/db/db.js",
 		"/E/Projects/rachna/Kanban/public/screens/verify/verifycontroller.js",
 		"/E/Projects/rachna/Kanban/public/screens/resetpassword/resetpasswordcontroller.js",
-		"/E/Projects/rachna/Kanban/public/screens/signin/signincontroller.js",
+		"/E/Projects/rachna/Kanban/util/tokenutil.js",
+		"/E/Projects/rachna/Kanban/public/screens/signup/signup.html",
+		"/E/Projects/rachna/Kanban/public/screens/signup/signupcontroller.js",
+		"/E/Projects/rachna/Kanban/public/screens/verify/verify.html",
+		"/E/Projects/rachna/Kanban/routes/index.js",
+		"/E/Projects/rachna/Kanban/public/screens/appcontroller.js",
+		"/E/Projects/rachna/Kanban/node_modules/express/lib/view.js",
+		"/E/Projects/rachna/Kanban/views/index.jade",
+		"/E/Projects/rachna/Kanban/public/screens/dashboard/dashboardcontroller.js",
+		"/E/Projects/rachna/Kanban/package.json",
+		"/C/Users/Manjeet/Downloads/api.js",
+		"/E/Projects/rachna/Kanban/public/screens/dashboard/project.html",
+		"/E/Projects/rachna/Kanban/public/screens/dashboard/dashboard.html",
 		"/E/Projects/rachna/Kanban/public/screens/login/login.html",
-		"/E/Projects/rachna/Kanban/public/screens/signin/signin.html",
 		"/E/Projects/rachna/Kanban/public/screens/login/logincontroller.js",
-		"/E/Projects/rachna/Kanban/public/screens/forgetpassword/forgetpasswordcontroller.js",
-		"/E/Projects/rachna/Kanban/public/screens/signup/signup.html"
+		"/E/Projects/rachna/Kanban/public/screens/forgetpassword/forgetpasswordcontroller.js"
 	],
 	"find":
 	{
@@ -206,6 +299,12 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"select\n",
+			">\n",
+			"$scope.projectinfo",
+			"$scope.upgrade",
+			"projectinfo",
+			"var6",
 			"router",
 			"x1",
 			"state.go",
@@ -221,6 +320,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			""
 		],
 		"reverse": false,
 		"show_context": true,
@@ -240,209 +340,98 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1190,
+						"buffer_size": 1963,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								618,
-								618
+								1020,
+								1020
 							]
 						],
 						"settings":
 						{
-							"auto_name": "routerApp.service('DataService', function ($http)",
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 74.0,
+						"translation.y": 198.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "public/index.html",
+					"file": "public/stylesheets/style.css",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1224,
+						"buffer_size": 3302,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1198,
-								1198
+								840,
+								840
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/CSS/CSS.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 300.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 2,
-					"file": "public/screens/appcontroller.js",
+					"file": "public/index.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 120,
+						"buffer_size": 1588,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								110,
-								110
+								690,
+								690
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+							"syntax": "Packages/HTML/HTML.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 484.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 3,
-					"file": "db/db.js",
+					"file": "public/screens/dashboard/dashboard.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1215,
+						"buffer_size": 2363,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								203,
-								203
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "routes/userservice.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1971,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1144,
-								1144
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 696.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "public/screens/signup/signupcontroller.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 495,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								367,
-								367
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "db/users.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3094,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1763,
-								1763
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 542.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "public/screens/signin/signin.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1275,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1091,
-								1091
+								1730,
+								1730
 							]
 						],
 						"settings":
@@ -451,113 +440,82 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 462.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 8,
-					"file": "public/screens/signin/signincontroller.js",
+					"buffer": 4,
+					"file": "public/screens/dashboard/dashboardcontroller.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 619,
+						"buffer_size": 9636,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								564,
-								564
+								5835,
+								5835
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"translate_tabs_to_spaces": false
 						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.x": 190.0,
+						"translation.y": 4092.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 9,
-					"file": "app.js",
+					"buffer": 5,
+					"file": "public/screens/dashboard/project.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1864,
+						"buffer_size": 4324,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1864,
-								1864
+								2669,
+								3956
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 894.0,
+						"translation.y": 880.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 10,
+					"buffer": 6,
 					"file": "public/javascripts/app.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1305,
+						"buffer_size": 1301,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								10,
-								10
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 11,
-					"file": "routes/index.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 205,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								205,
-								205
+								84,
+								84
 							]
 						],
 						"settings":
@@ -566,6 +524,33 @@
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "db/db.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1274,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								837,
+								837
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 264.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

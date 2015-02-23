@@ -46,9 +46,9 @@ module.exports.api={
 		          			console.log(err);
 			      			callback(err,null);
 		          		} else {
-		          			var text1 = "Hello " + arg.name+ "<br> Welcome in KanBan.<br> Please click on below link for verify your account:<br> http://192.168.100.199:5555/#/user/verify/" +res.verify_token;
-        				 	var form={to:arg.email,html:text1};
-                            emailvar.sendemail(form,function(err,result){
+		          			var text1 = "Hello " + arg.name + "<br> Welcome in KanBan.<br> Please click on below link for verify your account:<br> http://192.168.100.199:5555/#/user/verify/" +res.verify_token;
+        				 	var options={to:arg.email, html:text1, subject:"Welcome in KanBan"};
+                            emailvar.sendemail(options,function(err,result){
 				           	console.log("email verify");
 							callback(null,res);
 						})
@@ -63,7 +63,13 @@ module.exports.api={
 		  	}	
 	},
 	getusers:function(arg,callback){
-	    db.user.find({},function(err,res){
+		var teamarray = arg.split(',');
+		console.log(teamarray);
+	    db.user.find({
+       		'email': {
+           		$nin: teamarray
+       		}
+   		},function(err,res){
 			if(err){
 				callback(err,null);
 		  	} else {

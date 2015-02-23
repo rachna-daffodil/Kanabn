@@ -13,17 +13,18 @@ module.exports.api={
 		})
 	},
 	pproject:function(arg,callback){
+		console.log("in project create function");
 	   try{
-		    if(!arg.name)
+		    if(!arg.projectName)
                throw "name is required";
 			else{
 	             db.projects.create(arg,function(err,res){
-                 if(err){
-                 console.log(err);
-                 callback(err,null);			
- 		         } else {
-		         callback(null,res);
-		         }
+                 	if(err){
+                 		console.log(err);
+                 		callback(err,null);			
+ 		         	} else {
+		         	callback(null,res);
+		         	}
 	             })
 		      }
 		  } catch(error)
@@ -34,22 +35,29 @@ module.exports.api={
     },
 	save:function(task,updation,callback){
 	    db.projects.update(task,updation,function(err,res){
-		  console.log(task.name);
+		  console.log(task.projectName);
 		  if(err){
 		    console.log(err);
 			callback(err,null);
 		  } else {
-		    db.tasks.update({"proname":task.name},{"proname":updation.name},{multi:true},function(err,res1){
-		    console.log(updation.name);
-		    if(err){
-		      console.log(err);
-			  callback(err,null);
-		     } else {
-			   console.log("helloooo"+res1);
-		       callback(null,res);
-		     }
-		    })
-			//callback(null,res);
+		    console.log(res);
+			callback(null,res);
+			}
+		})
+	},
+	saveemail:function(task,updation,callback){
+		console.log("in saveemail");
+		var teamarray = updation.split(',');
+		console.log("array is ",teamarray);
+	    db.projects.update(task,
+   			{ $addToSet: { email: {$each : teamarray} } },function(err,res){
+		  console.log(task.projectName);
+		  if(err){
+		    console.log(err);
+			callback(err,null);
+		  } else {
+		    console.log(res);
+			callback(null,res);
 			}
 		})
 	},

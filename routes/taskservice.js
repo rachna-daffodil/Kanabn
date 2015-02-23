@@ -4,7 +4,7 @@ var transporter = nodemailer.createTransport();
 var router = express.Router();
 var api=require('../db/tasks.js').api;
 
-router.post('/task/create', function(req, res, next) {
+router.post('/create', function(req, res, next) {
   api.create(req.body,function(err,response){
      if(err) { 
 	   res.status(400).send(err);
@@ -13,9 +13,9 @@ router.post('/task/create', function(req, res, next) {
 	   }
   });
 });
-router.get('/task/fetch/:pname/:ename', function(req, res, next) {
-  res.setHeader("Content-Type","application/json");
-  api.read({"proname":req.params.pname,"email":req.params.ename},function(err,response){
+router.get('/fetch/:pname', function(req, res, next) {
+  //res.setHeader("Content-Type","application/json");
+  api.read({"project_id":req.params.pname},function(err,response){
      if(err) { 
 	  res.status(400).send(err);
      } else {
@@ -23,19 +23,19 @@ router.get('/task/fetch/:pname/:ename', function(req, res, next) {
 	   }
   });
 });
-router.put('/task/update/:change/:change2/:change3', function(req, res, next) {
-  res.setHeader("Content-Type","application/json");
-  console.log(req.params.change+req.params.change2+req.params.change3);
-  api.update({"title":req.params.change,"email":req.params.change2,"proname":req.params.change3},req.body,function(err,response){
+router.put('/update/:change/:change1', function(req, res, next) {
+  //res.setHeader("Content-Type","application/json");
+  console.log(req.params.change);
+  api.update({"project_id":req.params.change, "taskname":req.params.change1},req.body,function(err,response){
     if(err){
       res.status(400).send(err);
     } else {
-      //api.read();
+      res.send("result"+response);
 	   console.log(response);
     }
   });
 });
-router.delete('/task/delete', function(req, res, next) {
+router.delete('/delete', function(req, res, next) {
   api.deletea(req.body,function(err,response){
     if(err){
       res.status(400).send(err);

@@ -1,8 +1,18 @@
 kanbanApp.service('DataService',['$http', function ($http) {
     var result;
-   this.getWebService = function ($scope, webServiceUrl, params) {
+   this.getWebService = function ($scope, webServiceUrl, callback) {
       var completeWebServiceUrl = $scope.BASE_URL + webServiceUrl;
-      return $http.get(webServiceUrl, params);
+      $http.get(webServiceUrl).
+      success(function(data){
+              console.log("data is "+data);
+              result = data;
+              console.log("result in service ",result);
+              callback(null,data);
+            }).error(function(data){
+               alert("error is ");
+               result = data;
+            });
+        return result;
    };
 
    this.postWebService = function ($scope, webServiceUrl, params, callback) {
