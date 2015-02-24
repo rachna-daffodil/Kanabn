@@ -9,7 +9,7 @@ kanbanApp.controller('DashboardController', function($scope, $state, ngDialog, D
 	 $scope.p="true";     $scope.dd="";
 	 $scope.var7=false;
 	 $scope.dragitem="";
-	 $scope.num=0;
+	 $scope.num=0;   $scope.var9 = false;
 	  $scope.projectclick=function(){
 	    $scope.myvar = !$scope.myvar;
 	    DataService.getWebService($scope, '/project/fetch/' + $scope.useremail, function(err,data){
@@ -71,7 +71,7 @@ kanbanApp.controller('DashboardController', function($scope, $state, ngDialog, D
 	  }
 	  $scope.invite=function(){
 	  	var params = {"email" : $scope.selectedmember };
-	   	DataService.putWebService($scope, '/project/updateemail/' +$scope.myvar3.projectName +'/'+$scope.selectedmember, params, function(err,data){
+	   	DataService.putWebService($scope, '/project/updateemail/' +$scope.myvar3._id +'/'+$scope.selectedmember, params, function(err,data){
 	    	if(err){
 	    		console.log(err);
 	    	} else { console.log($scope.myvar3+'/'+$scope.myvar3.email);
@@ -104,7 +104,7 @@ kanbanApp.controller('DashboardController', function($scope, $state, ngDialog, D
       $scope.var2=!$scope.var2;	  
 	} 
    $scope.addtask=function(){
-   		var params = {taskname:$scope.name1,project_id:$scope.myvar3._id,description:$scope.des,due_date:$scope.day,sequence:$scope.order};
+   		var params = {taskname:$scope.name1,project_id:$scope.myvar3._id,description:$scope.des,due_date:$scope.day,sequence:$scope.order, created_by :$scope.useremail};
 			DataService.postWebService($scope, '/task/create', params, function(err,data){
 				if(err){
 					console.log(err);
@@ -146,7 +146,7 @@ kanbanApp.controller('DashboardController', function($scope, $state, ngDialog, D
 	
 	$scope.save=function(){
 		var params = {description : $scope.d , due_date : $scope.dd,taskname : $scope.n, status1:$scope.s, created_by:$scope.c, completion_date:$scope.cd, modified_date:$scope.md, comments:$scope.com};
-			DataService.putWebService($scope, '/task/update/' + $scope.p, params, function(err,data){
+			DataService.putWebService($scope, '/task/update/' + $scope.p + '/'+$scope.n, params, function(err,data){
 				if(err){
 					console.log(err);
 				} else {
@@ -168,7 +168,7 @@ kanbanApp.controller('DashboardController', function($scope, $state, ngDialog, D
 	}
 	$scope.savechange=function(pro1){
 		var params = {"projectName" : $scope.newpro};
-			DataService.putWebService($scope, '/project/update/' + pro1.projectName, params, function(err,data){
+			DataService.putWebService($scope, '/project/update/' + pro1._id, params, function(err,data){
 				if(err){
 					console.log(err);
 				} else {
@@ -188,28 +188,91 @@ kanbanApp.controller('DashboardController', function($scope, $state, ngDialog, D
 			});
 	}
 	
-	$scope.showprofile = function(){
-		ngDialog.open({ 
-                        template: '<form>\
-                        				<label for="title" class="brdlabel">Title</label><br><input id="title" data-ng-model="n" ng-readonly="var5"/><br>
-	   <label for="title" class="brdlabel">Description</label><br><input id="title" type="text" data-ng-model="d" ng-readonly="var5"/><br>
-	   <label for="title" class="brdlabel">Status</label><br><input id="title" type="text" data-ng-model="s" ng-readonly="var5"/><br>
-	   <label for="title" class="brdlabel">Created-by</label><br><input id="title" type="date" data-ng-model="c" ng-readonly="var5"/><br>
-	   <label for="title" class="brdlabel">Assigned-date</label><br><input id="title" data-ng-model="a" ng-readonly="var5"/><br>
-	   <label for="title" class="brdlabel">Due-date</label><br><input id="title" type="text" data-ng-model="d" ng-readonly="var5"/><br>
-	   <label for="title" class="brdlabel">Completion-date</label><br><input id="title" type="text" data-ng-model="cd" ng-readonly="var5"/><br>
-	   <label for="title" class="brdlabel">Modified-date</label><br><input id="title" type="date" data-ng-model="md" ng-readonly="var5"/><br>
-	   <label for="title" class="brdlabel">Comments</label><br><input id="title" type="text" data-ng-model="com" ng-readonly="var5" style="margin-bottom:10px"/><br>
-	   <button type="submit" data-ng-click="save()">Save</button>
-		</form>',
-                              plain: true,
-                              scope: $scope,
-                              controller: ['$scope', function($scope) {
-                                                    console.log("dvcsdbhvujdsnhv duj");
-                                           }]
+	$scope.showprofile = function(profile){
+		DataService.getWebService($scope, '/user/signin/' + profile, function(err,data){
+			if(err){
+				console.log(err);
+			} else {
+				console.log("fcdcdscf",data)
+				$scope.var9 = !$scope.var9;
+				$scope.myvar2 = !$scope.myvar2;
+				$scope.name = data[0].name;
+				$scope.email = data[0].email;
+				$scope.mobile = data[0].mobile;
+				$scope.skype = data[0].skype;
+				$scope.pass = data[0].password;
+				console.log("Fffbfb "+$scope.var9+$scope.name+$scope.email);
+			}
+		});
+		
+		// ngDialog.open({ 
+  //                       template: '<form>\
+  //                       				<label for="title" class="brdlabel">First Name</label><br><input id="title" ng-readonly="var5"/><br>\
+  //                       				<label for="title" class="brdlabel">Last Name</label><br><input id="title" ng-readonly="var5"/><br>\
+	 //   <label for="title" class="brdlabel">Email</label><br><input id="title" type="email" ng-readonly="var5"/><br>\
+	 //   <label for="title" class="brdlabel">Mobile</label><br><input id="title" type="text" ng-readonly="var5"/><br>\
+	 //   <label for="title" class="brdlabel">Skype</label><br><input id="title" type="text" ng-readonly="var5"/><br>\
+	 //   <button type="submit" data-ng-click="save()">Save</button>\
+		// </form>',
+  //                             plain: true,
+  //                             scope: $scope,
+  //                             controller: ['$scope', function($scope) {
+  //                                                   console.log("dvcsdbhvujdsnhv duj");
+  //                                          }]
 
-                });
+  //               });
 	};
+
+	$scope.invitemember = function(){
+		$scope.var8 = !$scope.var8;
+	};
+	$scope.inviteemail = function(){
+		console.log($scope.newmember);
+		DataService.getWebService($scope, '/user/invite/' + $scope.newmember +'/'+$scope.myvar3._id, function(err,data){
+						if(err){
+							console.log(err);
+						} else {
+							$scope.var8 = !$scope.var8;
+						}
+					});
+	};
+
+	$scope.saveprofile = function(){
+		var params = {name : $scope.name, mobile : $scope.mobile, skype : $scope.skype};
+		DataService.putWebService($scope, '/user/signup/'+ $scope.useremail, params, function(err,data){
+			if(err){
+				console.log(err);
+			} else {
+				$scope.var9 = !$scope.var9;
+				$scope.username = $scope.name;
+			}
+		});
+	};
+
+	$scope.changepass = function(){
+		$scope.var10 = !$scope.var10;
+	};
+
+	$scope.savepass = function(){
+		if($scope.old == $scope.pass){
+		if($scope.new1 == $scope.new2){
+			var params = {password : $scope.new1};
+			DataService.putWebService($scope, '/user/signup/'+ $scope.useremail, params, function(err,data){
+			if(err){
+				console.log(err);
+			} else {
+				$scope.var10 = !$scope.var10;
+				console.log("dvdvdvdv",data);
+			}
+		});
+		} else {
+		alert("Confirm your new password");
+	}
+	} else {
+		alert("enter old password");
+	}
+	};
+
 	$scope.handleDragStart = function(data,event){
 		console.log("old seq of task to drop "+data.sequence);
     };
@@ -279,6 +342,7 @@ $scope.handlecompleteDragOver = function (dropedTask, event, belowTask) {
 		if(err){
 			console.log(err);
 		} else {
+
 			console.log(data);
 		}
 	});

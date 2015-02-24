@@ -29,7 +29,7 @@ router.post('/create', function(req, res, next) {
 router.put('/update/:nam', function(req, res, next) {
   //res.setHeader("Content-Type","application/json");
   console.log(req.body.projectName);
-  api.save({"projectName":req.params.nam},req.body,function(err,response){
+  api.save({"_id":req.params.nam},req.body,function(err,response){
     if(err){
       res.status(400).send(err);
     } else {
@@ -41,7 +41,7 @@ router.put('/update/:nam', function(req, res, next) {
 router.put('/updateemail/:nam/:array', function(req, res, next) {
   //res.setHeader("Content-Type","application/json");
   console.log("ggusjhcsu"+JSON.stringify(req.params.array));
-  api.saveemail({"projectName":req.params.nam},req.params.array,function(err,response){
+  api.saveemail({"_id":req.params.nam},req.params.array,function(err,response){
     if(err){
       res.status(400).send(err);
     } else {

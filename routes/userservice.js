@@ -3,8 +3,16 @@ var router = express.Router();
 var api = require('../db/users.js').api;
 
 
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+router.get('/invite/:email/:id', function(req, res, next) {
+  console.log("in invite function",req.params.email);
+    api.invite(req.params.email,req.params.id,function(err,response){
+    if(err){
+    res.status(400).send(err);
+  } else {
+    console.log(response);
+      res.send(response);
+  }
+  }); 
 });
 router.post('/signin', function(req, res, next) {
 	console.log("in signup function",req.body);
@@ -67,14 +75,25 @@ router.get('/signup/:team',function(req,res,next){
 	 }
   });
 });
-router.put('/user/signup/:change', function(req, res, next) {
-  res.setHeader("Content-Type","application/json");
+router.get('/signin/:email',function(req,res,next){
+  console.log(req.params.team);
+  api.getprofile({"email": req.params.email},function(err,response){
+  if(err) { 
+     res.status(400).send(err);
+     } else {
+     console.log(response);
+     res.send(response);
+   }
+  });
+});
+router.put('/signup/:change', function(req, res, next) {
+  //res.setHeader("Content-Type","application/json");
   console.log(req.params.change);
   api.verification({"email":req.params.change},req.body,function(err,response){
     if(err){
       res.status(400).send(err);
     } else {
-      //api.read();
+      res.send("result"+response);
 	  console.log(response);
     }
   });

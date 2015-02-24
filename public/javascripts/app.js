@@ -34,7 +34,12 @@ kanbanApp.config(function($stateProvider, $urlRouterProvider) {
 			controller: 'VerifyController',
             templateUrl: '/screens/verify/verify.html'       
         })
-		
+		.state('invite', {
+            url: '/user/invite/:token',
+			controller: 'SignupController',
+            templateUrl: '/screens/signup/signup.html'       
+        })
+
         $urlRouterProvider.otherwise('/user/signin');
 });
 

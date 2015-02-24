@@ -37,7 +37,7 @@ header
 }
 #task
 {
-  	width:77%;
+  	width:72%;
   	text-align:center;
   	display:inline-block;
   	color:#ffffff;
@@ -47,10 +47,11 @@ header
 }
 #forbtn
 {
-  	width:15%;
+  	width:20%;
   	display:inline-block;
+  	//background-color: red;
 }
-#sh,#sh1,#sh2,#sh3
+#sh,#sh1,#sh2,#sh3,#sh4
 {
 	width:16%; z-index:5;
 	background-color: #ffffff;
@@ -63,6 +64,7 @@ header
 #sh1,#sh2
 { margin-left: 83%;}
 #sh3{margin:50px 250px; box-shadow:5px 5px 8px 4px gray;}
+#sh4{ margin-left:78%;}
 .brdlabel
 {
 	margin-left: 10px;
@@ -160,7 +162,7 @@ h4
 	color: gray;
 	margin-bottom: 10px;
 }
-#taskdetail
+#taskdetail,#sh5
 {
   //height:370px;
   width:25%;

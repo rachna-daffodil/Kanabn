@@ -31,6 +31,14 @@ module.exports.api={
 		    console.log(err);
 			callback(err,null);
 		  } else {
+		  	if(updation.status1 == "completed"){
+		  		var text1 = "Hello <br> Welcome in KanBan.<br> Your task ";
+        				 	var options={to:arg.email, html:text1, subject:"Welcome in KanBan"};
+                            emailvar.sendemail(options,function(err,result){
+				           	console.log("email verify");
+							callback(null,res);
+						})
+		  	}
 		    callback(null,res);
 		  }
 		})

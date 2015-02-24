@@ -12,7 +12,7 @@ module.exports.api={
             else if(!arg.password)
                throw "enter the password";
             else{			   
-    	        db.user.find({email:arg.email,password:arg.password},function(err,res){
+    	        db.user.find({email:arg.email,password:arg.password},{password : 0},function(err,res){
 	            	if(err){
 		        		console.log(err);
 			    		callback(err,null);
@@ -69,7 +69,7 @@ module.exports.api={
        		'email': {
            		$nin: teamarray
        		}
-   		},function(err,res){
+   		},{password : 0},function(err,res){
 			if(err){
 				callback(err,null);
 		  	} else {
@@ -111,4 +111,34 @@ module.exports.api={
     		});
     	});
   	},
+  	invite:function(arg1,arg2,callback){	
+	   	console.log("in invite function "+JSON.stringify(arg2));
+       	db.user.find({"email":arg1},function(err,res){
+		    if(err){
+		       	console.log(err);
+		      	callback(err,null);
+		    } else {
+		    	if(res.length == 0){
+		    		console.log("if successful",res);
+		    		var text1 = "Hello <br> Welcome in KanBan.<br> Please click on below link to create your account in Kanban:<br> http://192.168.100.199:5555/#/user/invite/" +arg2;
+        			var options={to:arg1, html:text1, subject:"Welcome in KanBan"};
+                    emailvar.sendemail(options,function(err,result){
+			        	console.log("email verify");
+						callback(null,res);
+					})
+		       	} else {console.log("if fail",res);}
+	       	}
+        })
+    },
+    getprofile:function(arg,callback){
+		db.user.find(arg,function(err,res){
+	       	if(err){
+		   		console.log(err);
+		   		callback(err,null);
+		   	} else {
+				console.log("hello");
+		   		callback(null,res);
+		   	} 
+        })
+    }
 }

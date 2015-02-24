@@ -14,7 +14,7 @@ module.exports.email ={
       {
         options.subject = options.subject;
         console.log("in sendemail "+JSON.stringify(options)+'/'+fromEmail);
-        if(!options || !options.to || !options.html || !options.from || !options.subject){
+        if(!options || !options.to || !options.html || !options.subject){
           throw new Error("Mandatory things are missing.");
         }
         if(options.data){

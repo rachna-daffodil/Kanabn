@@ -34,7 +34,7 @@ kanbanApp.service('DataService',['$http', function ($http) {
       console.log("in service"+webServiceUrl+'/'+$scope);
       
       var completeWebServiceUrl = $scope.BASE_URL + webServiceUrl;
-       $http.put(webServiceUrl,params).
+       $http.put(webServiceUrl, params).
         success(function(data){
           console.log("data is "+data);
           result = data;

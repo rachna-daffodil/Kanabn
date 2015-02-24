@@ -19,7 +19,7 @@ register.plugin(uniqueValidator);
 
 var projectInfo= new Schema({
 	
-	projectName:{type:String,unique:true},
+	projectName:String,
 	email:{type:Array,default:[]}
 },{collection:"projects"});
 

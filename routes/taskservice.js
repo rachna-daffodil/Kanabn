@@ -25,7 +25,7 @@ router.get('/fetch/:pname', function(req, res, next) {
 });
 router.put('/update/:change/:change1', function(req, res, next) {
   //res.setHeader("Content-Type","application/json");
-  console.log(req.params.change);
+  console.log(req.params.change+req.params.change1);
   api.update({"project_id":req.params.change, "taskname":req.params.change1},req.body,function(err,response){
     if(err){
       res.status(400).send(err);
