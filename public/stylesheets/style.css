@@ -8,63 +8,74 @@ a {
 }*/
 #main1
 {
- 	width:100%;
-	height:700px;
-	background-color:#f0f0f0;
+ 	height:700px;
+ 	background-color:#ffffff;
 	position:relative;
+}
+#surface
+{
+	height:700px;
+ 	background-color:#0e74af;
+ 	//position: relative;
 }
 header
 {
- 	width:100%;
- 	//height:40px;
- 	background-color:#026aa7;
- 	padding-top:3px;
- 	padding-bottom:6px;
+ 	height:40px;
+ 	background-color:#0b6294;
+ 	padding-top:5px;
+ 	padding-bottom:5px;
 }
-.btn
+.headbtn
 {
   	display:inline-block;
   	height:30px;
-  	background-color:rgba(95, 154, 245, 0.68);
-  	border:1px solid rgba(95, 154, 245, 0.68);
+  	background-color:#5793b5;
+  	border:1px solid #5793b5;
   	border-radius:2px;
   	color:#ffffff;
   	font-family:Arial;
-  	margin-top:3px;
   	margin-left:5px;
-  	line-height:15px;
+  	//line-height:15px;
   	font-size:1em;
+
 }
+.headbtn:hover
+{background-color: #6ca0be; color:#ffffff;}
 #task
 {
-  	width:72%;
+  	width:150px;
   	text-align:center;
   	display:inline-block;
   	color:#ffffff;
   	font-size:1.25em;
   	font-weight:bold;
 	font-family:Arial;
+	margin-left: 30%;
 }
 #forbtn
 {
-  	width:20%;
-  	display:inline-block;
+   	display:inline-block;
   	//background-color: red;
+  	position:absolute;
+  	right:5px;
 }
 #sh,#sh1,#sh2,#sh3,#sh4
 {
-	width:16%; z-index:5;
+	width:200px; z-index:5;
 	background-color: #ffffff;
-	border:1px solid gray;
-	border-radius: 5px;
+	border:1px solid #ffffff;
+	margin-top: 5px;
 	max-height: 150px;
 	overflow: auto;
 	position:absolute;
+	box-shadow:0 3px 6px gray;
+	padding: 10px;
 }
-#sh1,#sh2
-{ margin-left: 83%;}
-#sh3{margin:50px 250px; box-shadow:5px 5px 8px 4px gray;}
-#sh4{ margin-left:78%;}
+#sh{border-radius:0px 3px 3px 0px; max-height: 350px;}
+#sh1{ margin-left: 6%; border-radius: 3px;}
+#sh2{ margin-left: 78%; width:300px; max-height:300px; border-radius: 3px;}
+#sh3{margin-left:0px; width:300px;}
+#sh4{ margin-left:79%; border-radius: 3px;}
 .brdlabel
 {
 	margin-left: 10px;
@@ -74,7 +85,7 @@ header
 }
 #title
 {
-	width: 80.5%;
+	width: 85%;
 	height:30px;
 	margin-left:10px ;
 	background-color: #f2f2f2;
@@ -85,6 +96,7 @@ header
 }
 #title :hover
 { border-color: gray; }
+
 .brdbtn
 {
 	padding: 5px 10px;
@@ -113,48 +125,42 @@ header
 { text-decoration: none;  }
 .project
 {
-	width:67.2%;
-	height:30px;
+	width:180px;
+	height:20px;
 	font-family:Arial;
 	font-size: 1.20em;
 	color:#404040;
-	background-color: #f2f2f2;
-	border-top:1px solid gray;border-bottom:1px solid gray;border-left:1px solid gray;
-	border-top-left-radius: 5px;
-	border-bottom-left-radius: 5px;
 	list-style-type: none; 
-	margin-top: 6px;  margin-left: 20px;
-	padding-left:10px; 
+	padding-left:20px; 
 	display: inline-block;
 }
 
 .rect
 {
-  width:28%;
+  width:260px;
   float:left;
-  background-color:#1975d1;
-  margin-left:35px;
-  margin-top:20px;
-  border:1px solid #1975d1;
-  border-radius:6px;
-  color:#ffffff;
+  background-color:#e2e4e6;
+  margin-left:10px;
+  border:1px solid #e2e4e6;
+  border-radius:3px;
+  color:#404040;
   padding-left:10px;
   padding-right:10px;
 }
 h4
 {
-  text-align:center;
+  //text-align:center;
   font-family:Arial;
 }
 #heading{font-family: Arial; width: 85%; display: inline-block;}
 .taskdiv
 {
 	height:30px;
-	width:68%;
+	width:96%;
 	margin:auto;
-	background-color: #f2f2f2;
-	border:1px solir #f2f2f2;
-	border-radius: 5px;
+	background-color: #ffffff;
+	border:1px solid #ffffff;
+	border-radius: 3px;
 	padding-top:5px;
 	padding-left:10px;
 	line-height: 20px;
@@ -164,9 +170,10 @@ h4
 }
 #taskdetail,#sh5
 {
-  //height:370px;
-  width:25%;
-  position:absolute;
+	margin-top:50px;
+  max-height:580px;
+  width:340px;
+  //position:absolute;
   padding-left:15px;
   padding-top:30px;
   float:right;
@@ -176,9 +183,11 @@ h4
   color:#ffffff;
   font-family:Arial;
   font-size:1em;
-  margin-left:75%;
+  //margin-left:1005px;
   box-shadow:5px 5px 8px 4px gray;
+  overflow:auto; display: inline-block;
 }
+#taskdetail{margin-top: 0px;}
 #team,#team1
 {
   max-height:250px;
@@ -195,3 +204,36 @@ h4
   padding-bottom:10px;
 }
 #team{ margin-left:1115px;}
+#pc
+{
+	color:gray;
+	font-size: 1.25em;
+	padding-left:10px;
+}
+#pc:hover{color:#1975d1;}
+.comment
+{
+	width:80.5%;
+	line-height: 20px;
+	font-size: 1em;
+	color:gray;
+}
+#projectbtn
+{
+	margin-left:10px;
+	
+	//display:inline-block; 
+	padding:5px 10px;
+	background-color: #0e74af;
+	border:1px solid #0e74af;
+	border-radius: 3px;
+	color:#ffffff;
+	font-size: 1.25em;
+	float: left;
+}
+#projectbtn:hover
+{background-color: #0c6599;}
+#project
+{
+	height: 50px;
+}

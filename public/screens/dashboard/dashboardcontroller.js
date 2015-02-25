@@ -2,7 +2,7 @@ kanbanApp.controller('DashboardController', function($scope, $state, ngDialog, D
       $scope.username = window.localStorage.getItem("name");
       $scope.useremail = window.localStorage.getItem("email");
 	  $scope.projects=[];	  $scope.members=[];    	  $scope.tags=[];
-	  $scope.var1=true;    $scope.selectedmember = [];
+	  $scope.var1=true;    $scope.selectedmember = [];    $scope.comments = [];
      $scope.var2=false;
      $scope.var5=true;
 	 $scope.n="true";    $scope.d="true";  $scope.s="true";	 $scope.e="true";
@@ -128,7 +128,7 @@ kanbanApp.controller('DashboardController', function($scope, $state, ngDialog, D
 	   $scope.var2=!$scope.var2; 
 	}
 	$scope.showdetail=function(detail){
-	   console.log(detail);
+	   
 	   $scope.n=detail.taskname;
 	   $scope.d=detail.description;
 	   $scope.s=detail.status1;
@@ -137,15 +137,15 @@ kanbanApp.controller('DashboardController', function($scope, $state, ngDialog, D
 	   $scope.p=detail.project_id;
 	   $scope.cd=detail.completion_date;
 	   $scope.md=detail.modified_date;
-	   $scope.com=detail.comments;
 	   $scope.var4=!$scope.var4;
+	   $scope.comments = detail.comments;
 	}
 	$scope.edit=function(){
        $scope.var5=!$scope.var5; 
    	}
 	
 	$scope.save=function(){
-		var params = {description : $scope.d , due_date : $scope.dd,taskname : $scope.n, status1:$scope.s, created_by:$scope.c, completion_date:$scope.cd, modified_date:$scope.md, comments:$scope.com};
+		var params = {description : $scope.d , due_date : $scope.dd,taskname : $scope.n, status1:$scope.s, created_by:$scope.c, completion_date:$scope.cd, assigned_to:$scope.md};
 			DataService.putWebService($scope, '/task/update/' + $scope.p + '/'+$scope.n, params, function(err,data){
 				if(err){
 					console.log(err);
@@ -155,16 +155,26 @@ kanbanApp.controller('DashboardController', function($scope, $state, ngDialog, D
 				}
 			});
 	}
+
+	$scope.savecomment = function(){
+		var params = {email : $scope.useremail, comment : $scope.com};
+			DataService.putWebService($scope, '/task/update/' + $scope.p + '/'+$scope.n, params, function(err,data){
+				if(err){
+					console.log(err);
+				} else {
+					$scope.var10=!$scope.var10;
+					console.log(data);
+				}
+			});
+	}
+
 	$scope.projecttoclick=function(){
 		$scope.var6=!$scope.var6;
 		}
 	$scope.rename=function(pro2){
 		console.log(pro2);
-		;
-		$scope.var6=!$scope.var6;
-		$scope.myvar=!$scope.myvar;
 		$scope.var7=!$scope.var7;
-		$scope.myvar3=pro2.projectName;
+		
 	}
 	$scope.savechange=function(pro1){
 		var params = {"projectName" : $scope.newpro};
@@ -251,6 +261,7 @@ kanbanApp.controller('DashboardController', function($scope, $state, ngDialog, D
 
 	$scope.changepass = function(){
 		$scope.var10 = !$scope.var10;
+		$scope.myvar2 = !$scope.myvar2;
 	};
 
 	$scope.savepass = function(){
@@ -319,6 +330,9 @@ kanbanApp.controller('DashboardController', function($scope, $state, ngDialog, D
 		});
 };
 $scope.handleprogressDragOver = function (dropedTask, event, belowTask) {
+	if(!dropedTask.assigned_date){
+		alert("Before drop please assign time to task");
+	} else {
 	var params = {status1: "inprogress"};
 	DataService.putWebService($scope, '/task/update/' +dropedTask.project_id +'/'+ dropedTask.taskname, params, function(err, data){
 		if(err){
@@ -335,9 +349,10 @@ $scope.handleprogressDragOver = function (dropedTask, event, belowTask) {
 			console.log(data);
 		}
 	});
+}
 };
 $scope.handlecompleteDragOver = function (dropedTask, event, belowTask) {
-	var params = {status1: "complete"};
+	var params = {status1: "complete", email : dropedTask.created_by};
 	DataService.putWebService($scope, '/task/update/' + dropedTask.project_id +'/'+ dropedTask.taskname, params, function(err, data){
 		if(err){
 			console.log(err);

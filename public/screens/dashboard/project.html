@@ -1,10 +1,16 @@
-<div data-ng-init="title">
-	<div style="margin-left:40px;display:inline-block;width:90%; background-color:#f2f2f2"><p data-ng-bind="myvar3.projectName" style="margin-left:40px;display:inline-block; padding:0px 10px; line-height:20px"></p><span class="glyphicon glyphicon-chevron-down" data-ng-click="notmembers()" style="margin-top:20px;display:inline-block;width:5%; height:40px"></span></div>
-    <span class="glyphicon glyphicon-user" data-ng-click="showteam()" style="margin-left:20px; margin-top:20px;display:inline-block;width:5%; height:40px"></span>
-	
-	<div class="rect">
+<div id="surface" data-ng-init="title">
+	<div id="project">
+		<button id="projectbtn" data-ng-bind="myvar3.projectName"></button>
+		<span class="glyphicon glyphicon-pencil" data-ng-click="rename(myvar3)" style="margin-left:10px;padding-top:10px"></span>
+	</div>
+    <div class="rect">
+	<div id="sh3" data-ng-show="var7">
+		<label for="title" class="brdlabel">Name</label><br>
+		<input id="title" type="text" name="newpro" data-ng-model="newpro"><br>
+		<button class="brdbtn" data-ng-click="savechange(projectinfo)">Save</button>
+	</div>
 		<h4 id="heading">Backlogs</h4>
-		<span class="glyphicon glyphicon-plus" data-ng-show="var1" data-ng-click="showtask()"></span>
+		<span class="glyphicon glyphicon-plus" data-ng-click="showtask()"></span>
 		<span data-ng-show="var2">
 			<input id="title" type="text" name="name1" data-ng-model="name1"><br>
 			<input id="title" type="text" name="des" data-ng-model="des"><br>
@@ -31,23 +37,22 @@
 	
 	<div id="taskdetail" data-ng-show="var4" data-ng-init="var4= false">
 		<span class="glyphicon glyphicon-pencil" data-ng-click="edit()" style="margin-left:85%"></span>
-		<span class="glyphicon glyphicon-remove" data-ng-click="" style="margin-left:10px"></span>
+		<span class="glyphicon glyphicon-remove" data-ng-click="var4 = !var4" style="margin-left:10px"></span>
 	   <label for="title" class="brdlabel">Title</label><br><input id="title" data-ng-model="n" ng-readonly="var5"/><br>
 	   <label for="title" class="brdlabel">Description</label><br><input id="title" type="text" data-ng-model="d" ng-readonly="var5"/><br>
 	   <label for="title" class="brdlabel">Status</label><br><input id="title" type="text" data-ng-model="s" ng-readonly="var5"/><br>
 	   <label for="title" class="brdlabel">Created-by</label><br><input id="title" type="date" data-ng-model="c" ng-readonly="var5"/><br>
+	   <label for="title" class="brdlabel">Assigned-to</label><br><input id="title" type="email" data-ng-model="md" ng-readonly="var5"/><br>
 	   <label for="title" class="brdlabel">Assigned-date</label><br><input id="title" data-ng-model="a" ng-readonly="var5"/><br>
 	   <label for="title" class="brdlabel">Due-date</label><br><input id="title" type="text" data-ng-model="d" ng-readonly="var5"/><br>
-	   <label for="title" class="brdlabel">Completion-date</label><br><input id="title" type="text" data-ng-model="cd" ng-readonly="var5"/><br>
-	   <label for="title" class="brdlabel">Modified-date</label><br><input id="title" type="date" data-ng-model="md" ng-readonly="var5"/><br>
-	   <label for="title" class="brdlabel">Comments</label><br><input id="title" type="text" data-ng-model="com" ng-readonly="var5" style="margin-bottom:10px"/><br>
-	   <button class="brdbtn" type="submit" data-ng-click="save()">Save</button>
-	</div>
-	<div id="team" data-ng-show="icon" data-ng-init="icon = false">
-		<li id="one" data-ng-repeat="m in myvar3.email" data-ng-click="showprofile(m)">{{m}}</li>
-	</div>
-	<div id="team1" data-ng-show="icon1" data-ng-init="icon1 = false">
-		<li id="one" data-ng-repeat="m in members" data-ng-click="select(m)">{{m.email}}</li>
-		<button class="brdbtn" data-ng-click="invite()">Add</button>
+	   <label for="title" class="brdlabel">Completion-date</label><br><input id="title" type="text" data-ng-model="cd" ng-readonly="var5"/>
+		<button class="brdbtn" type="submit" data-ng-click="save()">Save</button>
+		<p>Comment</p>
+		<div data-ng-repeat="c in comments">
+			<p class="comment" style="display:inline-block">{{c.email}}</p><p class="comment" style="display:inline-block">{{c.on_date}}</p>
+			<p class="comment">{{c.comment}}</p><hr>
+		</div>
+		<input id="title" type="text" data-ng-model="com"/><br>
+		<button class="brdbtn" type="submit" data-ng-click="savecomment()">Add Comment</button><hr>	
 	</div>
 </div>

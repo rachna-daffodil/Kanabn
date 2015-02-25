@@ -31,11 +31,11 @@ var taskInfo= new Schema({
 	     sequence:{type:Number,default:0},
 	     status1:{type:String,default:"backlog"},
 	     due_date:Date,
-	     completion_date:{type:Date,default:" "},
+	     completion_date:Date,
 	     created_by:String,
-	     assigned_date:{type:Date,default:" "},
-         modified_date:{type:Date,default:" "},
-         comments:{email:{type:String,default:[]},comment:{type:String,default:[]},on_date:String}
+	     assigned_date:Date,
+         assigned_to:String,
+         comments:{type:Array,default:[]}
      },{collection:"tasks"});
 
  

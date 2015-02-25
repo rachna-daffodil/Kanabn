@@ -31,12 +31,12 @@ module.exports.email ={
           options.sender = sender;
         }
       	transporter.sendMail(options, function(error, response){
-			if(error){
-				console.log(error);
-			} else {
-				console.log("Message sent: " + response.message);
-				callback(null,response);
-			}
+			   if(error){
+				    console.log(error);
+          } else {
+				    console.log("Message sent: " + response.message);
+				    callback(null,response);
+          }
 		});
 	},
 }
