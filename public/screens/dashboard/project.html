@@ -1,26 +1,19 @@
 <div id="surface" data-ng-init="title">
 	<div id="project">
 		<button id="projectbtn" data-ng-bind="myvar3.projectName"></button>
-		<span class="glyphicon glyphicon-pencil" data-ng-click="rename(myvar3)" style="margin-left:10px;padding-top:10px"></span>
+		<span class="glyphicon glyphicon-pencil" data-ng-click="rename(myvar3)" style="margin-left:10px;padding-top:10px" title="Rename Project"></span>
 	</div>
-    <div class="rect">
 	<div id="sh3" data-ng-show="var7">
 		<label for="title" class="brdlabel">Name</label><br>
 		<input id="title" type="text" name="newpro" data-ng-model="newpro"><br>
 		<button class="brdbtn" data-ng-click="savechange(projectinfo)">Save</button>
 	</div>
+    <div class="rect">
 		<h4 id="heading">Backlogs</h4>
-		<span class="glyphicon glyphicon-plus" data-ng-click="showtask()"></span>
-		<span data-ng-show="var2">
-			<input id="title" type="text" name="name1" data-ng-model="name1"><br>
-			<input id="title" type="text" name="des" data-ng-model="des"><br>
-			<input id="title" type="date" name="day" data-ng-model="day"><br>
-			<button class="btn" data-ng-click="addtask()" >Add</button>
-			<button class="btn" data-ng-click="canceltask()">Cancel</button>
-		</span><div id="one" ng-drag="true" ng-drop="true" data-ng-repeat="task in taskss | orderBy:'sequence'" ng-if="task.status1=='backlog'" ng-drag-data="task" ng-init="taskss = []" ng-drag-success="handleDragStart($data,$event)" ng-drop-success="handleDragOver($data,$event, task)">
+		<span class="glyphicon glyphicon-plus" data-ng-click="showtask()" title="Add new task"></span>
+		<div id="one" ng-drag="true" ng-drop="true" data-ng-repeat="task in taskss | orderBy:'sequence'" ng-if="task.status1=='backlog'" ng-drag-data="task" ng-init="taskss = []" ng-drag-success="handleDragStart($data,$event)" ng-drop-success="handleDragOver($data,$event, task)">
 			<p class="taskdiv" data-ng-click="showdetail(task)">{{task.taskname}}</p>
 		</div>
-		
 	</div>
 	<div class="rect" ng-drop="true" ng-drop-success="handleprogressDragOver($data,$event,task)">
 		<h4>In progress</h4>
@@ -34,25 +27,52 @@
 			<p class="taskdiv" data-ng-click="showdetail(task)">{{task.taskname}}</p>
 		</div>
 	</div>
-	
 	<div id="taskdetail" data-ng-show="var4" data-ng-init="var4= false">
-		<span class="glyphicon glyphicon-pencil" data-ng-click="edit()" style="margin-left:85%"></span>
-		<span class="glyphicon glyphicon-remove" data-ng-click="var4 = !var4" style="margin-left:10px"></span>
-	   <label for="title" class="brdlabel">Title</label><br><input id="title" data-ng-model="n" ng-readonly="var5"/><br>
-	   <label for="title" class="brdlabel">Description</label><br><input id="title" type="text" data-ng-model="d" ng-readonly="var5"/><br>
-	   <label for="title" class="brdlabel">Status</label><br><input id="title" type="text" data-ng-model="s" ng-readonly="var5"/><br>
-	   <label for="title" class="brdlabel">Created-by</label><br><input id="title" type="date" data-ng-model="c" ng-readonly="var5"/><br>
-	   <label for="title" class="brdlabel">Assigned-to</label><br><input id="title" type="email" data-ng-model="md" ng-readonly="var5"/><br>
-	   <label for="title" class="brdlabel">Assigned-date</label><br><input id="title" data-ng-model="a" ng-readonly="var5"/><br>
-	   <label for="title" class="brdlabel">Due-date</label><br><input id="title" type="text" data-ng-model="d" ng-readonly="var5"/><br>
-	   <label for="title" class="brdlabel">Completion-date</label><br><input id="title" type="text" data-ng-model="cd" ng-readonly="var5"/>
+		<span>Task Detail
+			<span class="glyphicon glyphicon-pencil" data-ng-click="edit()" style="margin-left:85%"></span>
+			<span class="glyphicon glyphicon-remove" data-ng-click="var4 = !var4" style="margin-left:10px"></span>
+		</span><hr>
+	   	<label for="title" class="brdlabel">Title</label><br>
+	   	<input id="title" data-ng-model="n" ng-readonly="var5"/><br>
+	   	<label for="title" class="brdlabel">Description</label><br>
+	   	<input id="title" type="text" data-ng-model="d" ng-readonly="var5"/><br>
+	   	<label for="title" class="brdlabel">Status</label><br>
+	   	<input id="title" type="text" data-ng-model="s" ng-readonly="var5"/><br>
+	   	<label for="title" class="brdlabel">Created-by</label><br>
+	   	<input id="title" type="text" data-ng-model="c" ng-readonly="var5"/><br>
+	   	<label for="title" class="brdlabel">Assigned-to</label><br>
+	   	<input id="title" type="email" data-ng-model="md" ng-readonly="var5"/><br>
+	   	<label for="title" class="brdlabel">Assigned-date</label><br>
+	   	<input id="title" type="date" data-ng-model="a" ng-readonly="var5"/><br>
+	   	<label for="title" class="brdlabel">Due-date</label><br>
+	   	<input id="title" type="date" data-ng-model="d" ng-readonly="var5"/><br>
+	   	<label for="title" class="brdlabel">Completion-date</label><br>
+	   	<input id="title" type="date" data-ng-model="cd" ng-readonly="var5"/>
 		<button class="brdbtn" type="submit" data-ng-click="save()">Save</button>
-		<p>Comment</p>
-		<div data-ng-repeat="c in comments">
-			<p class="comment" style="display:inline-block">{{c.email}}</p><p class="comment" style="display:inline-block">{{c.on_date}}</p>
-			<p class="comment">{{c.comment}}</p><hr>
+		<div data-ng-show="var11" data-ng-init="var11 = true">
+			<hr id="hr">
+			<p>Comments</p>
+			<div data-ng-repeat="c in comments">
+				<p class="comment" style="display:inline-block">{{c.email}}</p>
+				<p class="comment" style="display:inline-block">{{c.on_date}}</p>
+				<p class="comment">{{c.comment}}</p><hr id="hr">
+			</div>
+			<input id="title" type="text" data-ng-model="com"/><br>
+			<button class="brdbtn" type="submit" data-ng-click="savecomment()">Add Comment</button>
+			<hr>	
 		</div>
-		<input id="title" type="text" data-ng-model="com"/><br>
-		<button class="brdbtn" type="submit" data-ng-click="savecomment()">Add Comment</button><hr>	
+	</div>
+	<div id="sh5" data-ng-show="var2">
+		<span>Add Task 
+			<span class="glyphicon glyphicon-remove" data-ng-click="var2 = !var2" style="float:right; margin-right:10px;display:block;"></span>
+		</span><hr>
+		<label for="title" class="brdlabel">Title</label><br>
+		<input id="title" type="text" name="name1" data-ng-model="name1"><br>
+		<label for="title" class="brdlabel">Description</label><br>
+		<input id="title" type="text" name="des" data-ng-model="des"><br>
+		<label for="title" class="brdlabel">Due-date</label><br>
+		<input id="title" type="date" name="day" data-ng-model="day"><br>
+		<button class="brdbtn" data-ng-click="addtask()" >Add</button>
+		<button class="brdbtn" data-ng-click="canceltask()">Cancel</button>
 	</div>
 </div>

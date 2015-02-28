@@ -1,23 +1,11 @@
-/*body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
 
-a {
-  color: #00B7FF;
-}*/
-#main1
+#main1,#surface
 {
  	height:700px;
  	background-color:#ffffff;
-	position:relative;
 }
-#surface
-{
-	height:700px;
- 	background-color:#0e74af;
- 	//position: relative;
-}
+
+#main1{ position:relative;  }
 header
 {
  	height:40px;
@@ -29,63 +17,84 @@ header
 {
   	display:inline-block;
   	height:30px;
-  	background-color:#5793b5;
-  	border:1px solid #5793b5;
+  	background-color:#5B9ABE;
+  	border:1px solid #5B9ABE;
   	border-radius:2px;
   	color:#ffffff;
   	font-family:Arial;
   	margin-left:5px;
-  	//line-height:15px;
   	font-size:1em;
 
 }
 .headbtn:hover
 {background-color: #6ca0be; color:#ffffff;}
+.brdbtn
+{
+	padding: 5px 10px;
+	margin: 10px;
+	background-color: rgb(104, 168, 0);;
+	border:1px solid rgb(104, 168, 0);;
+	border-radius: 5px;
+	font-size: 1.10em;
+	color:#ffffff;
+	font-family: Arial;
+}
+.brdbtn:hover
+{ background-color:green; }
 #task
 {
   	width:150px;
   	text-align:center;
   	display:inline-block;
-  	color:#ffffff;
+  	color:#8EB9D2;
   	font-size:1.25em;
   	font-weight:bold;
-	font-family:Arial;
+	font-family:Comic Sans MS;
 	margin-left: 30%;
+	 text-decoration: none;
 }
+#task:hover{color:#cce1ed; text-decoration: none;}
+#hr
+{
+	margin-top: 10px;
+	margin-bottom:10px;
+	border-width:1px;
+	border-color:#c8c8c8;
+}
+
 #forbtn
 {
    	display:inline-block;
-  	//background-color: red;
   	position:absolute;
   	right:5px;
 }
 #sh,#sh1,#sh2,#sh3,#sh4
 {
-	width:200px; z-index:5;
+	width:270px;
+	z-index:5;
 	background-color: #ffffff;
 	border:1px solid #ffffff;
 	margin-top: 5px;
-	max-height: 150px;
 	overflow: auto;
 	position:absolute;
 	box-shadow:0 3px 6px gray;
 	padding: 10px;
 }
-#sh{border-radius:0px 3px 3px 0px; max-height: 350px;}
-#sh1{ margin-left: 6%; border-radius: 3px;}
-#sh2{ margin-left: 78%; width:300px; max-height:300px; border-radius: 3px;}
-#sh3{margin-left:0px; width:300px;}
-#sh4{ margin-left:79%; border-radius: 3px;}
+#sh{border-radius:0px 3px 3px 0px;        max-height: 400px;}
+#sh1{ margin-left: 6%;         max-height: 200px;       border-radius: 3px;}
+#sh2{ margin-left: 78%; width:300px; max-height:350px; border-radius: 3px; padding-top:10px 0px;}
+#sh3{margin-left:0px;     width:300px;}
+#sh4{ margin-left:79%;    border-radius: 3px;    max-height: 400px;}
 .brdlabel
 {
 	margin-left: 10px;
 	font-family: Arial;
-	font-size: 1.25em;
+	font-size: 1.05em;
 	color: gray;
 }
 #title
 {
-	width: 85%;
+	width: 95%;
 	height:30px;
 	margin-left:10px ;
 	background-color: #f2f2f2;
@@ -97,30 +106,18 @@ header
 #title :hover
 { border-color: gray; }
 
-.brdbtn
-{
-	padding: 5px 10px;
-	margin: 10px;
-	background-color: #19a319;
-	border:1px solid #19A319;
-	border-radius: 5px;
-	font-size: 1.10em;
-	color:#ffffff;
-	font-family: Arial;
-}
-.brdbtn:hover
-{ background-color: green; }
+
 .pro
 {
 	height:30px;
-	//line-height: 20px;
-	width: 90%;
-	margin: 20px 20px; 
-	font-size: 1.35em;
+	width: 100%;
+	font-size: 1.15em;
 	color:gray;
+	padding-left:10px; 
+	font-weight: bold;
 }
 .pro:hover
-{ color:#404040;}
+{ color:#404040; background-color: #1975d1;}
 #out:hover
 { text-decoration: none;  }
 .project
@@ -149,7 +146,6 @@ header
 }
 h4
 {
-  //text-align:center;
   font-family:Arial;
 }
 #heading{font-family: Arial; width: 85%; display: inline-block;}
@@ -168,12 +164,11 @@ h4
 	color: gray;
 	margin-bottom: 10px;
 }
-#taskdetail,#sh5
+#taskdetail,#sh5,#sh6
 {
 	margin-top:50px;
   max-height:580px;
   width:340px;
-  //position:absolute;
   padding-left:15px;
   padding-top:30px;
   float:right;
@@ -183,17 +178,16 @@ h4
   color:#ffffff;
   font-family:Arial;
   font-size:1em;
-  //margin-left:1005px;
   box-shadow:5px 5px 8px 4px gray;
   overflow:auto; display: inline-block;
 }
 #taskdetail{margin-top: 0px;}
+#sh6{width: 400px;}
 #team,#team1
 {
   max-height:250px;
   width:200px;
   position:absolute;
- 
   overflow:auto;
   background-color:#ffffff;
   border:1px solid #1975d1;
@@ -221,8 +215,6 @@ h4
 #projectbtn
 {
 	margin-left:10px;
-	
-	//display:inline-block; 
 	padding:5px 10px;
 	background-color: #0e74af;
 	border:1px solid #0e74af;
@@ -236,4 +228,11 @@ h4
 #project
 {
 	height: 50px;
+}
+img
+{
+	height: 150px;
+	width:150px;
+	border:1px solid gray;
+	margin-bottom: 20px;
 }

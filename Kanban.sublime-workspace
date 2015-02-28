@@ -4,8 +4,32 @@
 		"selected_items":
 		[
 			[
+				"te",
+				"text-decoration"
+			],
+			[
+				"co",
+				"comments"
+			],
+			[
+				"fon",
+				"font-weight"
+			],
+			[
+				"font-",
+				"font-size"
+			],
+			[
+				"font",
+				"font-family"
+			],
+			[
 				"ma",
-				"margin-top"
+				"margin-bottom"
+			],
+			[
+				"tas",
+				"taskss"
 			],
 			[
 				"inl",
@@ -76,10 +100,6 @@
 				"margin-left"
 			],
 			[
-				"fon",
-				"font-family"
-			],
-			[
 				"paddi",
 				"padding-right"
 			],
@@ -100,10 +120,6 @@
 				"text-decoration"
 			],
 			[
-				"font",
-				"font-size"
-			],
-			[
 				"wid",
 				"width"
 			],
@@ -114,10 +130,6 @@
 			[
 				"margin",
 				"margin-top"
-			],
-			[
-				"co",
-				"color"
 			],
 			[
 				"border-r",
@@ -164,10 +176,6 @@
 				"project"
 			],
 			[
-				"tas",
-				"task"
-			],
-			[
 				"p",
 				"project"
 			],
@@ -187,7 +195,7 @@
 			"file": "public/index.html",
 			"settings":
 			{
-				"buffer_size": 1588,
+				"buffer_size": 1658,
 				"line_ending": "Windows"
 			}
 		},
@@ -195,7 +203,7 @@
 			"file": "public/stylesheets/style.css",
 			"settings":
 			{
-				"buffer_size": 3978,
+				"buffer_size": 4055,
 				"line_ending": "Unix"
 			}
 		},
@@ -203,7 +211,7 @@
 			"file": "public/screens/dashboard/dashboard.html",
 			"settings":
 			{
-				"buffer_size": 4398,
+				"buffer_size": 6065,
 				"line_ending": "Windows"
 			}
 		},
@@ -211,7 +219,7 @@
 			"file": "public/screens/dashboard/dashboardcontroller.js",
 			"settings":
 			{
-				"buffer_size": 11210,
+				"buffer_size": 13350,
 				"line_ending": "Windows"
 			}
 		},
@@ -219,7 +227,18 @@
 			"file": "public/screens/dashboard/project.html",
 			"settings":
 			{
-				"buffer_size": 4152,
+				"buffer_size": 4755,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "var express=require('express');\nvar db=require('./db.js');\nvar api=require('./users.js').api;\nvar token=require('../util/tokenutil.js').password;\nvar emailvar=require('../util/mailutil.js').email;\n\nmodule.exports.api={\n	login:function(arg,callback){	\n        try{\n		    if(!arg.email)\n               throw \"email is required\";\n            else if(!arg.password)\n               throw \"enter the password\";\n            else{			   \n    	        db.user.find({email:arg.email,password:arg.password},{password : 0},function(err,res){\n	            	if(err){\n		        		console.log(err);\n			    		callback(err,null);\n		        	} else {\n						console.log(\"hello\");\n		        		callback(null,res);\n		        	} \n               	})\n            }\n		} catch(error) { \n		    error.prototype=Error.prototype;\n			callback(error,null);\n		}	\n	},\n	register:function(arg,callback){	\n	    try{\n		    if(!arg.email)\n               throw \"email is required\";\n			else if(!arg.name)\n               throw \"enter the name\";\n            else if(!arg.password)\n               throw \"enter the password\";\n            else{\n            		console.log(\"in register function \"+JSON.stringify(arg));\n            		token.generatetokan(function(err,result)\n        			{\n						console.log(\"login 1\");\n						arg.verify_token=result;\n                  		db.user.create(arg,function(err,res){\n		          			if(err){\n		          				console.log(err);\n			      				callback(err,null);\n		          			} else {\n		          				var text1 = \"Hello \" + arg.name + \"<br> Welcome in KanBan.<br> Please click on below link for verify your account:<br> http://192.168.100.199:5555/#/user/verify/\" +res.verify_token;\n        				 		var options={to:arg.email, html:text1, subject:\"Welcome in KanBan\"};\n                            	emailvar.sendemail(options,function(err,result){\n				           			console.log(\"email verify\");\n									callback(null,res);\n								})\n		           		}\n	              		})\n             		 })\n             	}\n			} catch(error)\n          	{ \n		     error.prototype=Error.prototype;\n			 callback(error,null);\n		  	}	\n	},\n	getusers:function(arg,callback){\n		var teamarray = arg.split(',');\n		console.log(teamarray);\n	    db.user.find({\n       		'email': {\n           		$nin: teamarray\n       		}\n   		},{password : 0},function(err,res){\n			if(err){\n				callback(err,null);\n		  	} else {\n		    	callback(null,res);\n		  	}  \n		})\n	},\n	verification:function(task,updation,callback){\n		console.log(\"in verification\"+task+'/'+updation);\n	    db.user.update(task,updation,function(err,res){\n			console.log(updation);\n		  	if(err){\n		    	console.log(err);\n				callback(err,null);\n		  	} else {\n		    	callback(null,res);\n		  	}\n		})\n	},\n	resetpass:function(opts,change,callback)\n  	{ \n  		var test=opts.email;\n  		token.changepassword(function(data,result){\n  			console.log(\"resetpass\");\n        	opts.password = result;\n   			db.user.update({\"email\":opts.email},{password:opts.password},function(err,result1) {\n      			if(err) {\n          			console.log(err);\n          			callback(err,null);\n        		} else {\n            		var html=\"hello user <br> your password is \"+result; \n            		var form={to:opts.email,html:html};\n            		emailvar.sendemail(form,function(err,result2){\n            			console.log(\"password change \");\n            		});\n        			console.log(\"task updated\");\n        			callback(null,result1);\n       			}\n    		});\n    	});\n  	},\n  	invite:function(arg1,arg2,callback){	\n	   	console.log(\"in invite function \"+JSON.stringify(arg2));\n       	db.user.find({\"email\":arg1},function(err,res){\n		    if(err){\n		       	console.log(err);\n		      	callback(err,null);\n		    } else {\n		    	if(res.length == 0){\n		    		console.log(\"if successful\",res);\n		    		var text1 = \"Hello <br> Welcome in KanBan.<br> Please click on below link to create your account in Kanban:<br> http://192.168.100.199:5555/#/user/invite/\" +arg2;\n        			var options={to:arg1, html:text1, subject:\"Welcome in KanBan\"};\n                    emailvar.sendemail(options,function(err,result){\n			        	console.log(\"email verify\");\n						callback(null,res);\n					})\n		       	} else {console.log(\"if fail\",res);}\n	       	}\n        })\n    },\n    getprofile:function(arg,callback){\n		db.user.find(arg,{password : 0},function(err,res){\n	       	if(err){\n		   		console.log(err);\n		   		callback(err,null);\n		   	} else {\n				console.log(\"hello\");\n		   		callback(null,res);\n		   	} \n        })\n    }\n}",
+			"file": "db/users.js",
+			"file_size": 4611,
+			"file_write_time": 130693988486954608,
+			"settings":
+			{
+				"buffer_size": 4481,
 				"line_ending": "Windows"
 			}
 		}
@@ -251,18 +270,18 @@
 	},
 	"file_history":
 	[
-		"/E/Projects/rachna/Kanban/public/services/service.js",
-		"/E/Projects/rachna/Kanban/db/db.js",
-		"/E/Projects/rachna/Kanban/util/mailutil.js",
 		"/E/Projects/rachna/Kanban/db/tasks.js",
-		"/E/Projects/rachna/Kanban/public/screens/dashboard/dashboardcontroller.js",
-		"/E/Projects/rachna/Kanban/public/screens/signin/signincontroller.js",
-		"/E/Projects/rachna/Kanban/routes/taskservice.js",
-		"/E/Projects/rachna/Kanban/db/users.js",
 		"/E/Projects/rachna/Kanban/db/projects.js",
+		"/E/Projects/rachna/Kanban/db/db.js",
+		"/E/Projects/rachna/Kanban/public/screens/signin/signincontroller.js",
 		"/E/Projects/rachna/Kanban/routes/projectservice.js",
-		"/E/Projects/rachna/Kanban/routes/userservice.js",
+		"/E/Projects/rachna/Kanban/routes/taskservice.js",
 		"/E/Projects/rachna/Kanban/public/screens/dashboard/dashboard.html",
+		"/E/Projects/rachna/Kanban/db/users.js",
+		"/E/Projects/rachna/Kanban/public/services/service.js",
+		"/E/Projects/rachna/Kanban/util/mailutil.js",
+		"/E/Projects/rachna/Kanban/public/screens/dashboard/dashboardcontroller.js",
+		"/E/Projects/rachna/Kanban/routes/userservice.js",
 		"/E/Projects/rachna/Kanban/public/index.html",
 		"/E/Projects/rachna/Kanban/public/screens/signup/signupcontroller.js",
 		"/E/Projects/rachna/Kanban/public/javascripts/app.js",
@@ -303,6 +322,12 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"\";\n",
+			"var10",
+			"myvar3.email",
+			" myvar3.email",
+			"invite",
+			"addproject",
 			"var7",
 			"height",
 			"readonly",
@@ -342,7 +367,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 5,
 			"sheets":
 			[
 				{
@@ -351,15 +376,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1588,
+						"buffer_size": 1658,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								699,
-								699
+								1658,
+								1658
 							]
 						],
 						"settings":
@@ -368,7 +393,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 18.0,
+						"translation.y": 152.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -379,15 +404,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3978,
+						"buffer_size": 4055,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								267,
-								267
+								4054,
+								4054
 							]
 						],
 						"settings":
@@ -395,7 +420,7 @@
 							"syntax": "Packages/CSS/CSS.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 132.0,
+						"translation.y": 4596.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -406,15 +431,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4398,
+						"buffer_size": 6065,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4370,
-								4370
+								6065,
+								6065
 							]
 						],
 						"settings":
@@ -423,7 +448,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1188.0,
+						"translation.y": 2176.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -434,15 +459,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 11210,
+						"buffer_size": 13350,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1685,
-								1685
+								9061,
+								9044
 							]
 						],
 						"settings":
@@ -450,8 +475,8 @@
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
-						"translation.x": 50.0,
-						"translation.y": 840.0,
+						"translation.x": 38.0,
+						"translation.y": 5658.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -462,15 +487,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4152,
+						"buffer_size": 4755,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3803,
-								3803
+								8,
+								8
 							]
 						],
 						"settings":
@@ -479,7 +504,34 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1166.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "db/users.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4481,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1914,
+								1914
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 572.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

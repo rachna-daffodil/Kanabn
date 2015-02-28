@@ -14,7 +14,6 @@ router.post('/create', function(req, res, next) {
   });
 });
 router.get('/fetch/:pname', function(req, res, next) {
-  //res.setHeader("Content-Type","application/json");
   api.read({"project_id":req.params.pname},function(err,response){
      if(err) { 
 	  res.status(400).send(err);
@@ -24,13 +23,16 @@ router.get('/fetch/:pname', function(req, res, next) {
   });
 });
 router.put('/update/:change/:change1', function(req, res, next) {
-  //res.setHeader("Content-Type","application/json");
   console.log(req.params.change+req.params.change1);
   api.update({"project_id":req.params.change, "taskname":req.params.change1},req.body,function(err,response){
     if(err){
       res.status(400).send(err);
     } else {
-      res.send("result"+response);
+      if((response == 0)||(response ==1)){
+        res.send("result"+response);
+      } else {
+      res.send(response);
+    }
 	   console.log(response);
     }
   });

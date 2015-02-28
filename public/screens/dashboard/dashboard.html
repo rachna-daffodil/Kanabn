@@ -1,71 +1,110 @@
 <div id="main1">
 	<header>
 		<button class="headbtn" data-ng-click="projectclick()">Projects</button>
-		<button class="headbtn" data-ng-click="addproclick()"><span class="glyphicon glyphicon-plus" style="font-size:13px;color:#ffffff"></span></button>
-		<div id="task">Task Manager</div>
+		<button class="headbtn" data-ng-click="addproclick()">
+			<span class="glyphicon glyphicon-plus" style="font-size:13px;color:#ffffff" title="Add New Project"></span>
+		</button>
+		<a id="task" ui-sref='dashboard' title="Go to Dashboard page">Task Manager</a>
 		<div id="forbtn">
-			<button class="headbtn" data-ng-click="invitemember()"><span class="glyphicon glyphicon-plus" style="font-size:13px;color:#ffffff"></span></button>
-			<button class="headbtn" data-ng-click="showteam()"><span class="glyphicon glyphicon-user" style="font-size:13px;color:#ffffff"></span></button>
+			<button class="headbtn" data-ng-click="invitemember()" data-ng-show="icons">
+				<span class="glyphicon glyphicon-plus" style="font-size:13px;color:#ffffff" title="Invite a member"></span>
+			</button>
+			<button class="headbtn" data-ng-click="showteam()" data-ng-show="icons">
+				<span class="glyphicon glyphicon-user" style="font-size:13px;color:#ffffff" title="Members involved in this project"></span>
+			</button>
 			<button class="headbtn" data-ng-bind="username" data-ng-click="nameclick()"></button>
 		</div>   
 	</header>
 	<div id="content">
 		<div id="sh" data-ng-show="myvar" data-ng-init="myvar = false ">
+			<span style="font-size:1.15em;color:gray">Projects</span>
+			<span class="glyphicon glyphicon-remove" data-ng-click="myvar = false" style="float:right;margin-right:10px"></span>
+			<hr id="hr">
 			<div data-ng-repeat="p in projects">
 				<li class="project" data-ng-click="readtask(p)" data-ng-mouseover = "projecttoclick()">{{p.projectName}}
-				</li><hr>
+				</li>
+				<hr id="hr">
 			</div>
 		</div>
 		<div id="sh1" data-ng-show="myvar1" data-ng-init="myvar1 = false">
-			<span class="glyphicon glyphicon-remove" data-ng-click="addproclick()" style="float:right;margin-right:10px"></span>
-			<span class="glyphicon glyphicon-ok" data-ng-click="addproject()" style="float:right;margin-right:10px"></span>
+			<span>Add Project
+				<span class="glyphicon glyphicon-remove" data-ng-click="addproclick()" style="float:right;margin-right:10px"></span>
+			</span>
+			<hr id="hr">
 			<form name="myForm1">
 				<label for="title" class="brdlabel">Project Name</label><br>
 				<input type="text" id="title" name="title" data-ng-model="title" required/>
-				<span style="color:red" data-ng-show="myForm1.title.$dirty && myForm1.title.$invalid"><span data-ng-show="myForm1.title.$error.required">Title is required.</span>
+				<span style="color:red" data-ng-show="myForm1.title.$dirty && myForm1.title.$invalid">
+					<span data-ng-show="myForm1.title.$error.required">Title is required.</span>
 				</span>
+				<button class="brdbtn" data-ng-click="addproject()">Rename</button>
 			</form>
 		</div>
 		<div id="sh2" data-ng-show="myvar2" data-ng-init="myvar2 = false">
+			<span data-ng-bind="username" style="margin-left:10px;margin-top:10px;"></span>
+			<span class="glyphicon glyphicon-remove" data-ng-click="myvar2 = false" style="float:right;margin-right:10px;"></span><hr id="hr">
 			<div class="pro" data-ng-click="showprofile(useremail)">Profile</div>
 			<div class="pro" data-ng-click="changepass()">Change Password</div>
-			<hr>
-			<div class="pro"  data-ng-click="notmembers()">Team Directory</div><hr>
-			<a id="out" ui-sref="signin"><div class="pro">Logout</div></a>
+			<hr id="hr">
+			<div class="pro"  data-ng-click="notmembers()">Team Directory</div><hr id="hr">
+			<a id="out" ui-sref="signin">
+				<div class="pro">Logout</div>
+			</a>
 		</div>
-		
-		
-	<div id="sh4" data-ng-show="var8" data-ng-init="var8 = false">
-		<span class="glyphicon glyphicon-remove" data-ng-click="var8 = !var8" style="float:right;margin-right:10px"></span>
-		<label for="title" class="brdlabel">Email</label><br>
-		<input id="title" type="text" name="newmember" data-ng-model="newmember" placeholder="Enter valid email"><br>
-		<button class="brdbtn" data-ng-click="inviteemail()">Invite</button>
+		<div id="sh4" data-ng-show="var8" data-ng-init="var8 = false">
+			<span>Invite Member
+				<span class="glyphicon glyphicon-remove" data-ng-click="var8 = !var8" style="float:right;margin-right:10px"></span>
+			</span><hr>
+			<label for="title" class="brdlabel">Email</label><br>
+			<input id="title" type="text" name="newmember" data-ng-model="newmember" placeholder="Enter valid email"><br>
+			<button class="brdbtn" data-ng-click="inviteemail()">Invite</button>
+		</div>
+		<div id="sh6" data-ng-show="var9">
+			<form>
+				<span class="glyphicon glyphicon-pencil" data-ng-click="edit()" style="margin-left:85%"></span>
+				<span class="glyphicon glyphicon-remove" data-ng-click="closeprofile()" style="margin-left:10px"></span>
+				<img id="profileImage" class="imageTag" ng-src="{{image}}"/>
+       			<input class="inputBoxImage" id="imagefile" type="file" name="imagefile" accept=" image/gif,image/png,image/jpg" onchange="angular.element(this).scope().uploadImage()"/>  
+				<label for="title" class="brdlabel">Name</label>
+				<span data-ng-bind="name" data-ng-show="var5"></span><br>
+				<input id="title" ng-readonly="var5" data-ng-model="name" data-ng-show="!var5"/>
+				<label for="title" class="brdlabel">Email</label><br>
+				<input id="title" type="email" data-ng-model="email" readonly/><br>
+				<label for="title" class="brdlabel">Mobile</label><br>
+				<input id="title" type="number" ng-readonly="var5" data-ng-model="mobile"/><br>
+				<label for="title" class="brdlabel">Skype</label><br>
+				<input id="title" type="email" ng-readonly="var5" data-ng-model="skype"/><br><br>
+				<button class="brdbtn" type="submit" data-ng-click="saveprofile()">Save</button>
+			</form>
+		</div>
+		<div id="sh5" data-ng-show="var10" data-ng-init="var10 = false">
+			<span>Change Password
+				<span class="glyphicon glyphicon-remove" data-ng-click=" var10 = !var10" style="float:right;margin-right:10px"></span>
+			</span><hr>
+			<label for="title" class="brdlabel">Old Password</label><br>
+			<input id="title" type="password" data-ng-model="old"/><br>
+			<label for="title" class="brdlabel">New Password</label><br>
+			<input id="title" type="password" data-ng-model="new1"/><br>
+			<label for="title" class="brdlabel">Confirm Password</label><br>
+			<input id="title" type="password" data-ng-model="new2"/>
+			<button class="brdbtn" type="submit" data-ng-click="savepass()">Change</button><br>
+		</div>
+		<div id="sh5" data-ng-show="icon" data-ng-init="icon = false">
+			<li id="one" data-ng-repeat="m in myvar3.email" data-ng-click="showprofile(m)" style="color:gray">{{m}}</li>
+		</div>
+		<div id="sh6" data-ng-show="icon1" data-ng-init="icon1 = false">
+			<span>Team Directory
+				<span class="glyphicon glyphicon-remove" data-ng-click="icon1 = !icon1" style="float:right; margin-right:10px;display:block;"></span>
+			</span><hr id="hr">
+			<div data-ng-repeat="m in members" style="width:380px">
+				<img id="image" ng-src="{{m.image}}" style="display:inline-block;height:100px; width:100px; background-image:url(../images/placeholder_female.jpg)"/>
+				<div style="width:225px;display:inline-block;padding-left:20px;">
+					<span style="width:100px;">{{m.name}}</span><br>
+					<span style="width:100px">{{m.email}}</span>
+					<button class="brdbtn" data-ng-click="invite(m)">Add</button>
+				</div><hr>
+			</div>
+		</div>
+		<div ui-view></div>
 	</div>
-	<div id="sh5" data-ng-show="var9">
-		<form>
-			<span class="glyphicon glyphicon-pencil" data-ng-click="edit()" style="margin-left:85%"></span>
-			<span class="glyphicon glyphicon-remove" data-ng-click=" var9 = !var9" style="margin-left:10px"></span>
-			<label for="title" class="brdlabel">Name</label><br><input id="title" ng-readonly="var5" data-ng-model="name"/><br>
-			<label for="title" class="brdlabel">Email</label><br><input id="title" type="email" data-ng-model="email" readonly/><br>
-			<label for="title" class="brdlabel">Mobile</label><br><input id="title" type="number" ng-readonly="var5" data-ng-model="mobile"/><br>
-			<label for="title" class="brdlabel">Skype</label><br><input id="title" type="email" ng-readonly="var5" data-ng-model="skype"/><br><br>
-			<button class="brdbtn" type="submit" data-ng-click="saveprofile()">Save</button>
-		</form>
-	</div>
-	<div id="sh5" data-ng-show="var10" data-ng-init="var10 = false">
-		<span class="glyphicon glyphicon-remove" data-ng-click=" var10 = !var10" style="margin-left:80%"></span>
-			<label for="title" class="brdlabel">Old Password</label><br><input id="title" type="password" data-ng-model="old"/><br>
-			<label for="title" class="brdlabel">New Password</label><br><input id="title" type="password" data-ng-model="new1"/><br>
-			<label for="title" class="brdlabel">Confirm Password</label><br><input id="title" type="password" data-ng-model="new2"/>
-			<button class="brdbtn" type="submit" data-ng-click="savepass()">Change</button>
-			<br>
-	</div>
-	<div id="team" data-ng-show="icon" data-ng-init="icon = false">
-		<li id="one" data-ng-repeat="m in myvar3.email" data-ng-click="showprofile(m)">{{m}}</li>
-	</div>
-	<div id="team1" data-ng-show="icon1" data-ng-init="icon1 = false">
-		<li id="one" data-ng-repeat="m in members" data-ng-click="select(m)">{{m.email}}</li>
-		<button class="brdbtn" data-ng-click="invite()">Add</button>
-	</div>
-	<div ui-view></div>
 </div>

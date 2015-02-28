@@ -6,7 +6,6 @@ var api=require('../db/projects.js').api;
 
 
 router.get('/fetch/:username', function(req, res, next) {
-  //res.setHeader("Content-Type","application/json");
   api.gproject({"email":req.params.username},function(err,response){
     if(err) { 
 	   res.status(400).send(err);
@@ -27,7 +26,6 @@ router.post('/create', function(req, res, next) {
   });
 });
 router.put('/update/:nam', function(req, res, next) {
-  //res.setHeader("Content-Type","application/json");
   console.log(req.body.projectName);
   api.save({"_id":req.params.nam},req.body,function(err,response){
     if(err){
@@ -38,10 +36,9 @@ router.put('/update/:nam', function(req, res, next) {
     }
   });
 });
-router.put('/updateemail/:nam/:array', function(req, res, next) {
-  //res.setHeader("Content-Type","application/json");
-  console.log("ggusjhcsu"+JSON.stringify(req.params.array));
-  api.saveemail({"_id":req.params.nam},req.params.array,function(err,response){
+router.put('/updateemail/:nam', function(req, res, next) {
+  console.log("ggusjhcsu"+JSON.stringify(req.body));
+  api.saveemail({"_id":req.params.nam},req.body,function(err,response){
     if(err){
       res.status(400).send(err);
     } else {

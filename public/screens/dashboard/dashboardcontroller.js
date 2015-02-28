@@ -1,6 +1,7 @@
 kanbanApp.controller('DashboardController', function($scope, $state, ngDialog, DataService) {
       $scope.username = window.localStorage.getItem("name");
       $scope.useremail = window.localStorage.getItem("email");
+      $scope.pass = window.localStorage.getItem("pass");
 	  $scope.projects=[];	  $scope.members=[];    	  $scope.tags=[];
 	  $scope.var1=true;    $scope.selectedmember = [];    $scope.comments = [];
      $scope.var2=false;
@@ -9,7 +10,30 @@ kanbanApp.controller('DashboardController', function($scope, $state, ngDialog, D
 	 $scope.p="true";     $scope.dd="";
 	 $scope.var7=false;
 	 $scope.dragitem="";
-	 $scope.num=0;   $scope.var9 = false;
+	 $scope.num=0;   $scope.var9 = false;	$scope.icons = false;
+		// $scope.AddTask = false;
+	 // 		$scope.ShowTask = false;
+	 // 		$scope.ShowProfile = false;
+	 // 		$scope.TeamDirectory = false;
+	 // 		$scope.ChangePassword = false;
+	 // 		$scope.ShowProjects = false;
+	 // 		$scope.AddProject = false;
+	 // 		$scope.Actions = false;
+	 // $scope.close = function(){
+	 // 	$scope.AddTask = false;
+	 // 		$scope.ShowTask = false;
+	 // 		$scope.ShowProfile = false;
+	 // 		$scope.TeamDirectory = false;
+	 // 		$scope.ChangePassword = false;
+	 // 		$scope.ShowProjects = false;
+	 // 		$scope.AddProject = false;
+	 // 		$scope.Actions = false;
+	 // }
+	 // $scope.show = function(key){
+	 // 	$scope.close();
+	 // 	console.log("WDWDW",key);
+	 // 	key = true;
+	 // }
 	  $scope.projectclick=function(){
 	    $scope.myvar = !$scope.myvar;
 	    DataService.getWebService($scope, '/project/fetch/' + $scope.useremail, function(err,data){
@@ -34,12 +58,14 @@ kanbanApp.controller('DashboardController', function($scope, $state, ngDialog, D
 				} else {
 					if(data.length!=0){
              		window.localStorage.setItem("projectName", data);
-		 	 		$scope.myvar3=window.localStorage.getItem("projectName");
+		 	 		//$scope.myvar3=window.localStorage.getItem("projectName");
 		 	 		$scope.order=0;
 		 	 		$scope.projects.push({
 		 	   			projectName : data
        	     		});
+       	     		$scope.taskss = [];
 	     	 		$state.go('dashboard.project');
+	     	 		$scope.myvar3=data;
 		 	 		$scope.myvar1=!$scope.myvar1;
 					}
 				}
@@ -50,16 +76,16 @@ kanbanApp.controller('DashboardController', function($scope, $state, ngDialog, D
 	    $scope.myvar2=!$scope.myvar2; 
 	  }
 	  $scope.showteam=function(){
-	    $scope.icon=!$scope.icon;
-		console.log($scope.myvar3);
+	  	$scope.icon=!$scope.icon;
+		console.log($scope.myvar3.email);
 	  }
 	  $scope.notmembers=function(){
-	    $scope.icon1=!$scope.icon1;
+	  	$scope.icon1=!$scope.icon1;
 	    DataService.getWebService($scope, '/user/signup/' +$scope.myvar3.email, function(err,data){
 	    	if(err){
 	    		console.log(err);
 	    		} else {
-
+	    		$scope.myvar2=!$scope.myvar2;
 	    		$scope.members=data;
 	    		console.log(data);
 	    	}
@@ -69,9 +95,9 @@ kanbanApp.controller('DashboardController', function($scope, $state, ngDialog, D
 	     $scope.selectedmember.push(person.email);
 	     console.log("array is "+$scope.selectedmember);
 	  }
-	  $scope.invite=function(){
-	  	var params = {"email" : $scope.selectedmember };
-	   	DataService.putWebService($scope, '/project/updateemail/' +$scope.myvar3._id +'/'+$scope.selectedmember, params, function(err,data){
+	  $scope.invite=function(person){
+	  	var params = {"email" : person.email };
+	   	DataService.putWebService($scope, '/project/updateemail/' +$scope.myvar3._id, params, function(err,data){
 	    	if(err){
 	    		console.log(err);
 	    	} else { console.log($scope.myvar3+'/'+$scope.myvar3.email);
@@ -94,6 +120,7 @@ kanbanApp.controller('DashboardController', function($scope, $state, ngDialog, D
 		 	  	$scope.order=$scope.taskss.length;
 		 	 	$scope.myvar=!$scope.myvar;
 		 	 	$scope.var6=!$scope.var6;
+		 	 	$scope.icons = !$scope.icons;
 	    	}
 	    });
 	 }
@@ -142,6 +169,7 @@ kanbanApp.controller('DashboardController', function($scope, $state, ngDialog, D
 	}
 	$scope.edit=function(){
        $scope.var5=!$scope.var5; 
+       $scope.var11=!$scope.var11; 
    	}
 	
 	$scope.save=function(){
@@ -162,8 +190,9 @@ kanbanApp.controller('DashboardController', function($scope, $state, ngDialog, D
 				if(err){
 					console.log(err);
 				} else {
-					$scope.var10=!$scope.var10;
-					console.log(data);
+					$scope.com = " ";
+					$scope.comments = data[0].comments;
+					console.log(data[0].comments);
 				}
 			});
 	}
@@ -199,18 +228,21 @@ kanbanApp.controller('DashboardController', function($scope, $state, ngDialog, D
 	}
 	
 	$scope.showprofile = function(profile){
+		console.log("vvvervr",profile);
 		DataService.getWebService($scope, '/user/signin/' + profile, function(err,data){
 			if(err){
 				console.log(err);
 			} else {
 				console.log("fcdcdscf",data)
 				$scope.var9 = !$scope.var9;
-				$scope.myvar2 = !$scope.myvar2;
+				$scope.myvar2 = false;
+				$scope.icon = false;
 				$scope.name = data[0].name;
 				$scope.email = data[0].email;
 				$scope.mobile = data[0].mobile;
 				$scope.skype = data[0].skype;
-				$scope.pass = data[0].password;
+				$scope.image = data[0].image || url(../images/photo.png);
+				//$("#profileImage").attr("src", data[0].image);
 				console.log("Fffbfb "+$scope.var9+$scope.name+$scope.email);
 			}
 		});
@@ -232,7 +264,10 @@ kanbanApp.controller('DashboardController', function($scope, $state, ngDialog, D
 
   //               });
 	};
-
+	$scope.closeprofile = function(){
+		 $scope.var9 = !$scope.var9;
+		 $scope.image = " ";
+	}
 	$scope.invitemember = function(){
 		$scope.var8 = !$scope.var8;
 	};
@@ -248,7 +283,9 @@ kanbanApp.controller('DashboardController', function($scope, $state, ngDialog, D
 	};
 
 	$scope.saveprofile = function(){
-		var params = {name : $scope.name, mobile : $scope.mobile, skype : $scope.skype};
+		$scope.image = document.getElementById("profileImage").src
+        console.log("image on update my profile view:" + $scope.image);
+		var params = {name : $scope.name, mobile : $scope.mobile, skype : $scope.skype, image : $scope.image};
 		DataService.putWebService($scope, '/user/signup/'+ $scope.useremail, params, function(err,data){
 			if(err){
 				console.log(err);
@@ -283,6 +320,24 @@ kanbanApp.controller('DashboardController', function($scope, $state, ngDialog, D
 		alert("enter old password");
 	}
 	};
+
+	 $scope.uploadImage = function() {
+                    var filesSelected = document.getElementById("imagefile").files;
+                    console.log("Files Selected:" + JSON.stringify(filesSelected));
+                    if (filesSelected.length > 0) {
+                        var fileToLoad = filesSelected[0];
+                        var fileReader = new FileReader();
+                        fileReader.onload = function(fileLoadedEvent) {
+                            var srcData = fileLoadedEvent.target.result;
+                            console.log() // <--- data: base64
+                            document.getElementById("profileImage").src = srcData;
+                        }
+                        fileReader.readAsDataURL(fileToLoad);
+
+                    }
+
+                }
+
 
 	$scope.handleDragStart = function(data,event){
 		console.log("old seq of task to drop "+data.sequence);

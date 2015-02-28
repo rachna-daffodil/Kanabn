@@ -131,7 +131,7 @@ module.exports.api={
         })
     },
     getprofile:function(arg,callback){
-		db.user.find(arg,function(err,res){
+		db.user.find(arg,{password : 0},function(err,res){
 	       	if(err){
 		   		console.log(err);
 		   		callback(err,null);

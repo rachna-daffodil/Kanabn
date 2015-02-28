@@ -12,32 +12,27 @@ var register = new Schema({
   mobile:Number,
   image:String,
   skype:String
-
 },{collection:"users"});
 register.plugin(uniqueValidator);
 
-
 var projectInfo= new Schema({
-	
 	projectName:String,
 	email:{type:Array,default:[]}
 },{collection:"projects"});
 
-
 var taskInfo= new Schema({
-	     project_id:String,
-	     taskname:String,
-	     description:String,
-	     sequence:{type:Number,default:0},
-	     status1:{type:String,default:"backlog"},
-	     due_date:Date,
-	     completion_date:Date,
-	     created_by:String,
-	     assigned_date:Date,
-         assigned_to:String,
-         comments:{type:Array,default:[]}
-     },{collection:"tasks"});
-
+	project_id:String,
+	taskname:String,
+	description:String,
+	sequence:{type:Number,default:0},
+	status1:{type:String,default:"backlog"},
+	due_date:Date,
+	completion_date:Date,
+	created_by:String,
+	assigned_date:Date,
+    assigned_to:String,
+    comments:{type:Array,default:[]}
+},{collection:"tasks"});
  
 module.exports.user= mongoose.model('singup',register);
 module.exports.projects  = mongoose.model('projectInfo',projectInfo); 

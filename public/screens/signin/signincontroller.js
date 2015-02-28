@@ -13,6 +13,7 @@ kanbanApp.controller('SigninController', function($scope,  $state, DataService) 
 		 			} else {
 		 				window.localStorage.setItem("email", data[0].email);
                         window.localStorage.setItem("name", data[0].name);
+                        window.localStorage.setItem("pass", data[0].password);
                         $scope.username = window.localStorage.getItem("name");
                         $state.go('dashboard');
                         console.log("successfully logged in"+data[0].name+'/'+$scope.username);
